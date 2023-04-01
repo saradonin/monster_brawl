@@ -47,11 +47,11 @@ def choose_monster(win_counter):
     if win_counter > 4:
         monster_type = random.randint(0, monster_index)
     elif win_counter > 2:
-        monster_type = random.randint(0, monster_index - 1)  # without strongest
-    elif win_counter > 0:
         monster_type = random.randint(0, monster_index - 2)  # without 2 of the strongest
+    elif win_counter > 0:
+        monster_type = random.randint(0, monster_index - 4)  # without 4 of the strongest
     else:
-        monster_type = random.randint(0, monster_index - 3)  # without 3 of the strongest
+        monster_type = random.randint(0, monster_index - 5)  # without 5 of the strongest
 
     monster_name = monsters["name"][monster_type]
     monster_intro = monsters["intro"][monster_type]
