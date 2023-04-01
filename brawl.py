@@ -1,6 +1,5 @@
 import random
 
-
 # dialogues
 greetings = """Greetings adventurer! 
 Navigate through the game using buttons from [1] to [4] on your keyboard.
@@ -42,7 +41,6 @@ monsters = {
 }
 
 
-
 def validate_input(message, num=2):
     while True:
         choice = input(message)
@@ -57,6 +55,7 @@ def validate_input(message, num=2):
         else:
             print("Invalid input. Try again.")
 
+
 def choose_player_class():
     message = choose_your_class
     player_choice = validate_input(message, len(player_char["name"]))
@@ -66,6 +65,7 @@ def choose_player_class():
     player_attacks = player_char["attacks"][player_index]
     player_hp = player_char["hp"][player_index]
     return player_index, player_max_damage, player_attacks, player_hp
+
 
 def choose_monster():
     # picking a monster
@@ -77,6 +77,7 @@ def choose_monster():
     monster_max_damage = monsters["max_damage"][monster_type]
     monster_hp = monsters["hp"][monster_type]
     return monster_name, monster_intro, monster_attacks, monster_max_damage, monster_hp
+
 
 def end_message(win_counter):
     """Prints ending message depending on how many matched player won
@@ -90,10 +91,10 @@ def end_message(win_counter):
     else:
         print(f"You won {win_counter} battles today. What a shame.")
 
+
 def fight():
     print(greetings)
     player_index, player_max_damage, player_attacks, player_hp = choose_player_class()
-
 
     win_counter = 0
 
@@ -133,8 +134,6 @@ def fight():
                     print("You both died.")
                     end_message(win_counter)
                     break
-
-
 
 
 message = "Wpisz coś"
