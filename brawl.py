@@ -26,7 +26,7 @@ def validate_input(message, num=2):
 def choose_player_class():
     """
     Takes user input and returns stats of player class.
-    :return: tuple (int, int, int, int)
+    :return: tuple (int, int, int, int) - class stats
     """
     message = choose_your_class
     player_choice = validate_input(message, len(player_char["name"]))
@@ -55,20 +55,6 @@ def choose_monster():
     return monster_name, monster_intro, monster_attacks, monster_max_damage, monster_hp
 
 
-def end_message(win_counter):
-    """
-    Prints ending message depending on how many matched player won
-    :param win_counter: int - number of battles won
-    :return: str - text message
-    """
-    if win_counter > 4:
-        print(f"You won {win_counter} battles today! Glorious! Songs of your victories will be sung in every inn.")
-    elif win_counter >= 1:
-        print(f"You won {win_counter} battles today. Not bad for a novice.")
-    else:
-        print(f"You won {win_counter} battles today. What a shame.")
-
-
 def damage(name1, name2, max_damage, attacks):
     """
     Takes attacker stats and returns total amount of damage done by attacker.
@@ -86,11 +72,24 @@ def damage(name1, name2, max_damage, attacks):
     return damage_done
 
 
+def end_message(win_counter):
+    """
+    Prints ending message depending on how many matched player won
+    :param win_counter: int - number of battles won
+    :return: str - text message
+    """
+    if win_counter > 4:
+        return f"You won {win_counter} battles today! Glorious! Songs of your victories will be sung in every inn."
+    elif win_counter >= 1:
+        return f"You won {win_counter} battles today. Not bad for a novice."
+    else:
+        return f"You won {win_counter} battles today. What a shame."
+
 
 def fight():
     """
-
-    :return:
+    This is where the fight happens.
+    :return: str - end message
     """
     print(greetings)
     player_index, player_max_damage, player_attacks, player_hp = choose_player_class()
@@ -100,26 +99,15 @@ def fight():
     while True:
         decision = validate_input(fight_or_flight, 2)
         if decision == 2:
-            print(bye_answer)
-            break
+            return bye_answer
         else:
             monster_name, monster_intro, monster_attacks, monster_max_damage, monster_hp = choose_monster()
 
             while player_hp > 0 and monster_hp > 0:
-
-                # monster_damage_done = 0
-                # for i in range(monster_attacks):
-                #     monster_strike = random.randint(1, monster_max_damage)
-                #     print(f"{monster_name} hit you for {monster_strike} points of damage")
-                #     monster_damage_done += monster_strike
+                # monster attack turn
                 monster_damage_done = damage(monster_name, "You", monster_max_damage, monster_attacks)
                 player_hp -= monster_damage_done
-
-                # player_damage_done = 0
-                # for i in range(player_attacks):
-                #     player_strike = random.randint(1, player_max_damage)
-                #     print(f"You hit {monster_name} for {player_strike} points of damage")
-                #     player_damage_done += player_strike
+                # player attack turn
                 player_damage_done = damage("You", monster_name, player_max_damage, player_attacks)
                 monster_hp -= player_damage_done
 
@@ -129,12 +117,10 @@ def fight():
                     win_counter += 1
                 elif player_hp <= 0 and monster_hp > 0:
                     print(f"You lost. {monster_name} won.")
-                    end_message(win_counter)
-                    break
+                    return end_message(win_counter)
                 else:
                     print("You both died.")
-                    end_message(win_counter)
-                    break
+                    return end_message(win_counter)
 
 
 # print(validate_input(message, 4))
