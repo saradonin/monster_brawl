@@ -25,7 +25,7 @@ def validate_input(message, num=2):
 
 def choose_player_class():
     """
-
+    Takes user input and returns stats of player class.
     :return: tuple (int, int, int, int)
     """
     message = choose_your_class
@@ -40,7 +40,7 @@ def choose_player_class():
 
 def choose_monster():
     """
-
+    Generates random monster form the list, returns monster stats.
     :return: tuple (string, string, int, int, int)
     """
     # picking a monster
@@ -56,7 +56,8 @@ def choose_monster():
 
 
 def end_message(win_counter):
-    """Prints ending message depending on how many matched player won
+    """
+    Prints ending message depending on how many matched player won
     :param win_counter: int - number of battles won
     :return: str - text message
     """
@@ -68,7 +69,29 @@ def end_message(win_counter):
         print(f"You won {win_counter} battles today. What a shame.")
 
 
+def damage(name1, name2, max_damage, attacks):
+    """
+    Takes attacker stats and returns total amount of damage done by attacker.
+    :param name1: str - attacker name
+    :param name2: str - opponent name
+    :param max_damage: int - max damage value
+    :param attacks: int - number of attacks per turn
+    :return: int - total damage done
+    """
+    damage_done = 0
+    for i in range(attacks):
+        strike = random.randint(1, max_damage)
+        print(f"{name1} hit {name2} for {strike} points of damage")
+        damage_done += strike
+    return damage_done
+
+
+
 def fight():
+    """
+
+    :return:
+    """
     print(greetings)
     player_index, player_max_damage, player_attacks, player_hp = choose_player_class()
 
@@ -84,18 +107,20 @@ def fight():
 
             while player_hp > 0 and monster_hp > 0:
 
-                monster_damage_done = 0
-                for i in range(monster_attacks):
-                    monster_strike = random.randint(1, monster_max_damage)
-                    print(f"{monster_name} hit you for {monster_strike} points of damage")
-                    monster_damage_done += monster_strike
+                # monster_damage_done = 0
+                # for i in range(monster_attacks):
+                #     monster_strike = random.randint(1, monster_max_damage)
+                #     print(f"{monster_name} hit you for {monster_strike} points of damage")
+                #     monster_damage_done += monster_strike
+                monster_damage_done = damage(monster_name, "You", monster_max_damage, monster_attacks)
                 player_hp -= monster_damage_done
 
-                player_damage_done = 0
-                for i in range(player_attacks):
-                    player_strike = random.randint(1, player_max_damage)
-                    print(f"You hit {monster_name} for {player_strike} points of damage")
-                    player_damage_done += player_strike
+                # player_damage_done = 0
+                # for i in range(player_attacks):
+                #     player_strike = random.randint(1, player_max_damage)
+                #     print(f"You hit {monster_name} for {player_strike} points of damage")
+                #     player_damage_done += player_strike
+                player_damage_done = damage("You", monster_name, player_max_damage, player_attacks)
                 monster_hp -= player_damage_done
 
             else:  # win and loose conditions
@@ -112,7 +137,6 @@ def fight():
                     break
 
 
-message = "Wpisz coś"
 # print(validate_input(message, 4))
 # print(choose_player_class())
 
