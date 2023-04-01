@@ -40,9 +40,11 @@ def choose_player_class():
 
 def choose_monster(win_counter):
     """
-    Generates random monster form the list, returns monster stats.
-    :return: tuple (string, string, int, int, int)
+    Generates random monster form the list base on win counter, returns monster stats.
+    :param win_counter: int - number of battles won
+    :return: tuple (string, string, int, int, int) - monster stats
     """
+
     monster_index = len(monsters["name"]) - 1  # dict range
     if win_counter > 4:
         monster_type = random.randint(0, monster_index)
