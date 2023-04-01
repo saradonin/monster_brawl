@@ -1,5 +1,5 @@
 import random
-from dialogues import greetings, fight_or_flight, choose_your_class, bye_answer, player_char, monsters
+from dialogues import greetings, fight_or_flight, choose_your_class, player_char, monsters
 
 
 def validate_input(message, num=2):
@@ -99,7 +99,7 @@ def fight():
     while True:
         decision = validate_input(fight_or_flight, 2)
         if decision == 2:
-            return bye_answer
+            return "Ok then, bye! Come back later."
         else:
             monster_name, monster_intro, monster_attacks, monster_max_damage, monster_hp = choose_monster()
 
@@ -112,10 +112,10 @@ def fight():
                 monster_hp -= player_damage_done
 
             else:  # win and loose conditions
-                if monster_hp <= 0 and player_hp > 0:
+                if player_hp > 0 >= monster_hp:
                     print("You won!")
                     win_counter += 1
-                elif player_hp <= 0 and monster_hp > 0:
+                elif monster_hp > 0 <= player_hp:
                     print(f"You lost. {monster_name} won.")
                     return end_message(win_counter)
                 else:

@@ -10,7 +10,7 @@ Fight or flight?
   1. [FIGHT] I'd love to see a good brawl!
   2. [FLIGHT] I'd rather stay home and read a book.
   """
-bye_answer = "Ok then, bye! Come back later."
+
 intro_bug = "It appears that this game is full of bugs!"
 intro_rat = "Squeak!"
 intro_goblin = "I don't have time for this..."
