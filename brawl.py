@@ -3,6 +3,12 @@ from dialogues import greetings, fight_or_flight, choose_your_class, bye_answer,
 
 
 def validate_input(message, num=2):
+    """
+    Prompts user to make a choice, validates input.
+    :param message: string - prompt
+    :param num: int - upper range of possible answers
+    :return: int - player choice
+    """
     while True:
         choice = input(message)
 
@@ -18,6 +24,10 @@ def validate_input(message, num=2):
 
 
 def choose_player_class():
+    """
+
+    :return: tuple (int, int, int, int)
+    """
     message = choose_your_class
     player_choice = validate_input(message, len(player_char["name"]))
     player_index = int(player_choice) - 1
@@ -29,6 +39,10 @@ def choose_player_class():
 
 
 def choose_monster():
+    """
+
+    :return: tuple (string, string, int, int, int)
+    """
     # picking a monster
     monster_index = len(monsters["name"]) - 1
     monster_type = random.randint(0, monster_index)
@@ -43,8 +57,8 @@ def choose_monster():
 
 def end_message(win_counter):
     """Prints ending message depending on how many matched player won
-    :param win_counter: int
-    :return: Text message
+    :param win_counter: int - number of battles won
+    :return: str - text message
     """
     if win_counter > 4:
         print(f"You won {win_counter} battles today! Glorious! Songs of your victories will be sung in every inn.")

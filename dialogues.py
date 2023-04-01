@@ -1,4 +1,6 @@
-# dialogues
+# This file only contains dialogues and dictionaries necessary for the game.
+
+
 greetings = """Greetings adventurer! 
 Navigate through the game using buttons from [1] to [4] on your keyboard.
 """
@@ -22,11 +24,13 @@ choose_your_class = """Choose your class:
   3. Sorcerer
   4. Warlock
   """
+
 player_char = {
     "name": ["Fighter", "Rogue", "Sorcerer", "Warlock"],
     "hp": [16, 10, 8, 14],
     "max_damage": [10, 4, 20, 2],
     "attacks": [1, 3, 1, 4],
+
 }
 monsters = {
     "name": ["Bug", "Rat", "Goblin",
