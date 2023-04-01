@@ -38,14 +38,20 @@ def choose_player_class():
     return player_index, player_max_damage, player_attacks, player_hp
 
 
-def choose_monster():
+def choose_monster(win_counter):
     """
     Generates random monster form the list, returns monster stats.
     :return: tuple (string, string, int, int, int)
     """
     # picking a monster
     monster_index = len(monsters["name"]) - 1
-    monster_type = random.randint(0, monster_index)
+    if win_counter > 4:
+        monster_type = random.randint(0, monster_index)
+    elif win_counter > 2:
+        monster_type = random.randint(0, monster_index - 1)  # without strongest
+    else:
+        monster_type = random.randint(0, monster_index - 2)  # without 2 of the strongest
+
     monster_name = monsters["name"][monster_type]
     monster_intro = monsters["intro"][monster_type]
     print(f"You encountered {monster_name}: {monster_intro}")
@@ -101,7 +107,7 @@ def fight():
         if decision == 2:
             return "Ok then, bye! Come back later."
         else:
-            monster_name, monster_intro, monster_attacks, monster_max_damage, monster_hp = choose_monster()
+            monster_name, monster_intro, monster_attacks, monster_max_damage, monster_hp = choose_monster(win_counter)
 
             while player_hp > 0 and monster_hp > 0:
                 # monster attack turn
