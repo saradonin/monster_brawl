@@ -15,6 +15,7 @@ intro_bug = "It appears that this game is full of bugs!"
 intro_rat = "Squeak!"
 intro_goblin = "I don't have time for this..."
 intro_orc = "Victory or death! Aaaaarghh!"
+intro_owlbear = "HOOT-GROWL!"
 intro_stone_golem = "Flesh. Weak. Return to the earth."
 intro_the_elder_god = "All places, all things have souls. All souls can be devoured."
 
@@ -33,11 +34,11 @@ player_char = {
 
 }
 monsters = {
-    "name": ["Bug", "Rat", "Goblin",
-             "Orc", "Stone Golem", "The Elder God"],
-    "hp": [1, 4, 8, 16, 32, 1023],
-    "max_damage": [1, 1, 4, 8, 3, 255],
-    "attacks": [4, 2, 1, 1, 1, 1],
-    "intro": [intro_bug, intro_rat, intro_goblin,
-              intro_orc, intro_stone_golem, intro_the_elder_god]
+    "name": ["Bug", "Rat", "Goblin", "Orc",
+             "Owlbear", "Stone Golem", "The Elder God"],
+    "hp": [1, 4, 8, 16, 20, 32, 1023],
+    "max_damage": [1, 1, 4, 8, 6, 3, 255],
+    "attacks": [4, 2, 1, 1, 1, 1, 1],
+    "intro": [intro_bug, intro_rat, intro_goblin, intro_orc,
+              intro_owlbear, intro_stone_golem, intro_the_elder_god]
 }
