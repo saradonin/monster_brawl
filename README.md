@@ -14,11 +14,10 @@ Python 3.x should be installed on your machine.
 4. Follow the on-screen instructions to play the game.
 
 ## How to play ##
-1. When you run the game, you will be prompted to choose a character class.
-2. After choosing a class, you will be prompted to choose how many attacks you want to make per turn and the maximum amount of damage you can inflict.
-3. You will then be prompted to choose whether you want to fight or flee.
-4. If you choose to fight, you will be randomly matched against a monster.
-5. The fight will continue until either you or the monster is defeated.
-6. If you win the fight, you will be matched against a stronger monster in the next fight.
-7. The game will end when you either defeat five monsters in a row or you are defeated by a monster.
+1. When you run the game, you will be prompted to choose a character class. Class determines your health points, number of attacks and maximum damage.
+2. You will then be prompted to choose whether you want to fight or flee.
+3. If you choose to fight, you will be randomly matched against a monster.
+4. The fight will continue until either you or the monster is defeated.
+5. If you win the fight, you will be matched against a stronger monster in the next fight.
+
 
