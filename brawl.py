@@ -35,7 +35,10 @@ class Creature:
         damage_done = 0
         for i in range(self.attacks_num):
             strike = random.randint(1, self.max_damage)
-            print(f"{self.name} hit {enemy.name} for {strike} points of damage")
+            if self in player_char:
+                print(f"You hit {enemy.name} for {strike} points of damage")
+            elif enemy in player_char:
+                print(f"{self.name} hit you for {strike} points of damage")
             damage_done += strike
         return damage_done
 
@@ -83,6 +86,7 @@ owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
 stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
 froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
 elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
+
 monsters_list = [bug, rat, goblin, orc, owlbear, stone_golem, froghemoth, elder_god]
 
 
@@ -138,9 +142,9 @@ def end_message(win_counter):
     :param win_counter: int - number of battles won
     :return: str - text message
     """
-    if win_counter > 4:
+    if win_counter > 5:
         return f"You won {win_counter} battles today! Glorious! Songs of your victories will be sung in every inn."
-    elif win_counter >= 1:
+    elif win_counter >= 3:
         return f"You won {win_counter} battles today. Not bad for a novice."
     else:
         return f"You won {win_counter} battles today. What a shame."
@@ -156,9 +160,9 @@ def fight():
 
     win_counter = 0
     fight_or_flight = """
-    Fight or flight? 
-      1. [FIGHT] I'd love to see a good brawl!
-      2. [FLIGHT] I'd rather stay home and read a book.
+Fight or flight? 
+1. [FIGHT] I'd love to see a good brawl!
+2. [FLIGHT] I'd rather stay home and read a book.
       """
     while True:
         decision = validate_input(fight_or_flight, 2)
