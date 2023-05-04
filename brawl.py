@@ -1,5 +1,4 @@
 import random
-import dialogues
 
 
 class Creature:
@@ -24,6 +23,8 @@ class PlayerClass(Creature):
         super().__init__(name, max_hp, attacks_num, max_damage)
 
 
+
+
 class Enemy(Creature):
     def __init__(self, name, level, max_hp, attacks_num, max_damage, intro):
         super().__init__(name, max_hp, attacks_num, max_damage)
@@ -37,9 +38,22 @@ rogue = PlayerClass('Rogue', 10, 3, 4)
 mage = PlayerClass('Mage', 8, 1, 20)
 warlock = PlayerClass('Warlock', 14, 4, 2)
 
-# create monsters
+choose_your_class = """Choose your class: 
+  1. Warrior
+  2. Rogue
+  3. Mage
+  4. Warlock
+  """
 
-owlbear = Enemy('Owlbear', 3, 20, 1, 6, dialogues.intro_owlbear)
+# create monsters
+bug = Enemy('Bug', 1, 1, 4, 1, "It appears that this game is full of bugs!")
+rat = Enemy('Rat', 1, 4, 2, 1, "Squeak!")
+goblin = Enemy('Goblin', 2, 8, 1, 4, "I don't have time for this...")
+orc = Enemy('Orc', 3, 16, 1, 8, "Victory or death! Aaaaarghh!")
+owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
+stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
+froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
+elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
 
 print(Creature.damage(rogue, owlbear))
 print(Creature.damage(owlbear, warrior))
@@ -71,7 +85,7 @@ def choose_player_class():
     Takes user input and returns stats of player class.
     :return: tuple (int, int, int, int) - class stats
     """
-    message = choose_your_class
+    message = dialogues.choose_your_class
     player_choice = validate_input(message, len(player_char["name"]))
     player_index = int(player_choice) - 1
 
@@ -143,11 +157,18 @@ def fight():
     This is where the fight happens.
     :return: str - end message
     """
+    greetings = """Greetings adventurer! 
+    Navigate through the game using buttons from [1] to [4] on your keyboard.
+    """
     print(greetings)
     player_index, player_max_damage, player_attacks, player_hp = choose_player_class()
 
     win_counter = 0
-
+    fight_or_flight = """
+    Fight or flight? 
+      1. [FIGHT] I'd love to see a good brawl!
+      2. [FLIGHT] I'd rather stay home and read a book.
+      """
     while True:
         decision = validate_input(fight_or_flight, 2)
         if decision == 2:
