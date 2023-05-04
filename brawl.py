@@ -47,10 +47,10 @@ warlock = PlayerClass('Warlock', 14, 4, 2)
 player_char = [warrior, rogue, mage, warlock]
 
 # create monsters
-bug = Enemy('Bug', 1, 1, 4, 1, "It appears that this game is full of bugs!")
-rat = Enemy('Rat', 1, 4, 2, 1, "Squeak!")
-goblin = Enemy('Goblin', 2, 8, 1, 4, "I don't have time for this...")
-orc = Enemy('Orc', 3, 16, 1, 8, "Victory or death! Aaaaarghh!")
+bug = Enemy('Bug', 0, 1, 4, 1, "It appears that this game is full of bugs!")
+rat = Enemy('Rat', 0, 4, 2, 1, "Squeak!")
+goblin = Enemy('Goblin', 1, 8, 1, 4, "I don't have time for this...")
+orc = Enemy('Orc', 2, 16, 1, 8, "Victory or death! Aaaaarghh!")
 owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
 stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
 froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
@@ -106,14 +106,20 @@ def choose_enemy(win_counter=0):
     :param win_counter: int - number of battles won
     :return: tuple (string, string, int, int, int) - monster stats
     """
-    monster = monsters_list[random.randint(0, len(monsters_list) - 1)]
+    while True:
+        monster = monsters_list[random.randint(0, len(monsters_list) - 1)]
+        if monster.level <= win_counter:
+            return monster
+        else:
+            continue
+
     # return monster.name, monster.intro, monster.max_hp, monster.hp, monster.attacks_num, monster.max_damage
-    return monster
+
+
 
 # test
-# for i in range(0,10):
-#     print(i, choose_enemy())
-
+for i in range(0,20):
+    print(i, choose_enemy(10))
 
 
 def end_message(win_counter):
@@ -174,4 +180,4 @@ def fight():
 # print(validate_input(message, 4))
 # print(choose_player_class())
 
-print(fight())
+# print(fight())
