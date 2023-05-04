@@ -37,6 +37,7 @@ warrior = PlayerClass('Warrior', 16, 1, 10)
 rogue = PlayerClass('Rogue', 10, 3, 4)
 mage = PlayerClass('Mage', 8, 1, 20)
 warlock = PlayerClass('Warlock', 14, 4, 2)
+player_char = [warrior, rogue, mage, warlock]
 
 choose_your_class = """Choose your class: 
   1. Warrior
@@ -54,6 +55,7 @@ owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
 stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
 froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
 elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
+
 
 print(Creature.damage(rogue, owlbear))
 print(Creature.damage(owlbear, warrior))
@@ -85,15 +87,17 @@ def choose_player_class():
     Takes user input and returns stats of player class.
     :return: tuple (int, int, int, int) - class stats
     """
-    message = dialogues.choose_your_class
-    player_choice = validate_input(message, len(player_char["name"]))
-    player_index = int(player_choice) - 1
+    message = choose_your_class
+    player_choice = validate_input(message, len(player_char))
+    player_object = player_char[int(player_choice - 1)]
 
-    player_max_damage = player_char["max_damage"][player_index]
-    player_attacks = player_char["attacks"][player_index]
-    player_hp = player_char["hp"][player_index]
-    return player_index, player_max_damage, player_attacks, player_hp
+    player_name = player_object.name
+    player_max_damage = player_object.max_damage
+    player_attacks = player_object.attacks_num
+    player_hp = player_object.max_hp
+    return player_name, player_max_damage, player_attacks, player_hp
 
+print(choose_player_class())
 
 def choose_monster(win_counter):
     """
@@ -157,10 +161,9 @@ def fight():
     This is where the fight happens.
     :return: str - end message
     """
-    greetings = """Greetings adventurer! 
+    print("""Greetings adventurer! 
     Navigate through the game using buttons from [1] to [4] on your keyboard.
-    """
-    print(greetings)
+    """)
     player_index, player_max_damage, player_attacks, player_hp = choose_player_class()
 
     win_counter = 0
