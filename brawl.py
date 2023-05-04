@@ -18,19 +18,6 @@ class Creature:
             damage_done += strike
         return damage_done
 
-    def set_hp(self, damage_taken):
-        self.hp = self.hp - damage_taken
-        if self.hp > 0:
-            return self.hp
-        else:
-            return f"{self.name} died!"
-
-
-class PlayerClass(Creature):
-    def __init__(self, name, max_hp, attacks_num, max_damage):
-        super().__init__(name, max_hp, attacks_num, max_damage)
-
-
 
 class Enemy(Creature):
     def __init__(self, name, level, max_hp, attacks_num, max_damage, intro):
@@ -40,10 +27,10 @@ class Enemy(Creature):
 
 
 # create player classes
-warrior = PlayerClass('Warrior', 16, 1, 10)
-rogue = PlayerClass('Rogue', 10, 3, 4)
-mage = PlayerClass('Mage', 8, 1, 20)
-warlock = PlayerClass('Warlock', 14, 4, 2)
+warrior = Creature('Warrior', 16, 1, 10)
+rogue = Creature('Rogue', 10, 3, 4)
+mage = Creature('Mage', 8, 1, 20)
+warlock = Creature('Warlock', 14, 4, 2)
 player_char = [warrior, rogue, mage, warlock]
 
 # create monsters
@@ -57,9 +44,6 @@ froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
 elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
 monsters_list = [bug, rat, goblin, orc, owlbear, stone_golem, froghemoth, elder_god]
 
-# test
-# print(Creature.damage(elder_god, stone_golem))
-# print(Creature.set_hp(orc, 2))
 
 def validate_input(message, num=2):
     """
@@ -85,7 +69,7 @@ def validate_input(message, num=2):
 def choose_player_class():
     """
     Takes user input and returns stats of player class.
-    :return: tuple (str, int, int, int) - class stats
+    :return: object
     """
     choose_your_class = """Choose your class: 
       1. Warrior
@@ -96,7 +80,6 @@ def choose_player_class():
     player_choice = validate_input(choose_your_class, len(player_char))
     player = player_char[int(player_choice - 1)]
 
-    # return player.name, player.max_hp, player.hp, player.attacks_num, player.max_damage
     return player
 
 
@@ -104,22 +87,19 @@ def choose_enemy(win_counter=0):
     """
     Generates random monster form the list based on win counter, returns monster stats.
     :param win_counter: int - number of battles won
-    :return: tuple (string, string, int, int, int) - monster stats
+    :return: object
     """
     while True:
         monster = monsters_list[random.randint(0, len(monsters_list) - 1)]
-        if monster.level <= win_counter:
+        if monster.level <= win_counter:  # only draws monsters with level lower on equal win counter
             return monster
         else:
             continue
 
-    # return monster.name, monster.intro, monster.max_hp, monster.hp, monster.attacks_num, monster.max_damage
-
-
 
 # test
-for i in range(0,20):
-    print(i, choose_enemy(10))
+# for i in range(0,20):
+#     print(i, choose_enemy(10))
 
 
 def end_message(win_counter):
@@ -154,8 +134,9 @@ def fight():
         decision = validate_input(fight_or_flight, 2)
         if decision == 2:
             return "Ok then, bye! Come back later."
-        else:
+        elif decision == 1:
             enemy = choose_enemy(win_counter)
+            enemy.hp = enemy.max_hp
             player.hp = player.max_hp
 
             while player.hp > 0 and enemy.hp > 0:
@@ -177,7 +158,5 @@ def fight():
                     print("You both died.")
                     return end_message(win_counter)
 
-# print(validate_input(message, 4))
-# print(choose_player_class())
 
-# print(fight())
+print(fight())
