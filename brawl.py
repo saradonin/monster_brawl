@@ -29,8 +29,8 @@ class Creature:
         """
         Calculates the amount of damage the creature can deal to an enemy.
 
-        :param enemy: obj - The enemy that the creature is attacking.
-        :return: int - The total amount of damage dealt to the enemy.
+        :param enemy: obj - the enemy that the creature is attacking
+        :return: int - total amount of damage dealt to the enemy
         """
         damage_done = 0
         for i in range(self.attacks_num):
@@ -103,8 +103,8 @@ def validate_input(message, num=2):
 
 def choose_player_class():
     """
-    Takes user input and returns stats of player class.
-    :return: object
+    Prompts the player to choose their character class from a list of options.
+    :return: obj - player's chosen character class object
     """
     choose_your_class = """Choose your class: 
       1. Warrior
@@ -122,7 +122,7 @@ def choose_enemy(win_counter=0):
     """
     Generates random monster form the list based on win counter, returns monster stats.
     :param win_counter: int - number of battles won
-    :return: object
+    :return: obj - enemy creature randomly generated object
     """
     while True:
         monster = monsters_list[random.randint(0, len(monsters_list) - 1)]
