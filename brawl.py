@@ -44,7 +44,7 @@ class Creature:
         return damage_done
 
 
-class Enemy(Creature, object):
+class Enemy(Creature):
     """
     A class that represents an enemy creature in a game. Inherits from the Creature base class.
 
@@ -77,8 +77,7 @@ choose_your_class = """Choose your class:
   4. Warlock
   """
 # create a list of player classes using gc module
-player_char = [ob.name for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
-
+player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
 # create monsters (name, level, max_hp, attacks_num, max_damage, intro)
 bug = Enemy('Bug', 0, 1, 4, 1, "It appears that this game is full of bugs!")
@@ -90,9 +89,7 @@ stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the eart
 froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
 elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
 # create a list of monsters using gc module
-monsters_list = [ob.name for ob in gc.get_objects() if isinstance(ob, Enemy)]
-
-
+monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
 
 
 def validate_input(message, num=2):
@@ -134,9 +131,11 @@ def choose_enemy(win_counter=0):
     :return: obj - enemy creature randomly generated object
     """
     while True:
-        monster = monsters_list[random.randint(0, len(monsters_list) - 1)]
-        if monster.level <= win_counter:  # only chooses monsters with level lower on equal win counter
-            return monster
+        enemy = monsters_list[random.randint(0, len(monsters_list) - 1)]
+        if enemy.level <= win_counter:  # only chooses monsters with level lower on equal win counter
+            print(f"You encountered {enemy.name}: {enemy.intro}")
+            enemy.hp = enemy.max_hp
+            return enemy
         else:
             continue
 
@@ -175,27 +174,25 @@ Fight or flight?
             return "Ok then, bye! Come back later."
         elif decision == 1:
             enemy = choose_enemy(win_counter)
-            enemy.hp = enemy.max_hp
             player.hp = player.max_hp
+
 
             while player.hp > 0 and enemy.hp > 0:
                 # monster attack turn
                 monster_damage_done = enemy.damage(player)
                 player.hp -= monster_damage_done
-                # player attack turn
-                player_damage_done = player.damage(enemy)
-                enemy.hp -= player_damage_done
 
-            else:  # win and loose conditions
-                if player.hp > 0 >= enemy.hp:
-                    print("You won!")
-                    win_counter += 1
-                elif enemy.hp > 0 <= player.hp:
+                if player.hp > 0:
+                    # player attack turn
+                    player_damage_done = player.damage(enemy)
+                    enemy.hp -= player_damage_done
+
+                else:
                     print(f"You lost. {enemy.name} won.")
                     return end_message(win_counter)
-                else:
-                    print("You both died.")
-                    return end_message(win_counter)
+            else:
+                print("You won!")
+                win_counter += 1
 
 
-# print(fight())
+print(fight())
