@@ -1,4 +1,5 @@
 import random
+import gc
 
 
 class Creature:
@@ -43,7 +44,7 @@ class Creature:
         return damage_done
 
 
-class Enemy(Creature):
+class Enemy(Creature, object):
     """
     A class that represents an enemy creature in a game. Inherits from the Creature base class.
 
@@ -75,7 +76,9 @@ choose_your_class = """Choose your class:
   3. Mage
   4. Warlock
   """
-player_char = [warrior, rogue, mage, warlock]
+# create a list of player classes using gc module
+player_char = [ob.name for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
+
 
 # create monsters (name, level, max_hp, attacks_num, max_damage, intro)
 bug = Enemy('Bug', 0, 1, 4, 1, "It appears that this game is full of bugs!")
@@ -86,8 +89,10 @@ owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
 stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
 froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
 elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
+# create a list of monsters using gc module
+monsters_list = [ob.name for ob in gc.get_objects() if isinstance(ob, Enemy)]
 
-monsters_list = [bug, rat, goblin, orc, owlbear, stone_golem, froghemoth, elder_god]
+
 
 
 def validate_input(message, num=2):
@@ -193,4 +198,4 @@ Fight or flight?
                     return end_message(win_counter)
 
 
-print(fight())
+# print(fight())
