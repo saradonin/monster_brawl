@@ -2,6 +2,21 @@ import random
 
 
 class Creature:
+    """
+    A base class that represents a creature in a game.
+
+    :ivar name: str - The name of the creature.
+    :ivar max_hp: int - The maximum hit points of the creature.
+    :ivar attacks_num: int - The number of attacks the creature can make.
+    :ivar max_damage: int - The maximum amount of damage the creature can deal.
+    :ivar hp: int - The current hit points of the creature, initialized to max_hp.
+
+    :param name: str - The name of the creature.
+    :param max_hp: int - The maximum hit points of the creature.
+    :param attacks_num: int - The number of attacks the creature can make.
+    :param max_damage: int - The maximum amount of damage the creature can deal.
+    """
+
     def __init__(self, name, max_hp, attacks_num, max_damage):
         self.name = name
         self.max_hp = max_hp
@@ -11,6 +26,12 @@ class Creature:
         self.hp = max_hp
 
     def damage(self, enemy):
+        """
+        Calculates the amount of damage the creature can deal to an enemy.
+
+        :param enemy: obj - The enemy that the creature is attacking.
+        :return: int - The total amount of damage dealt to the enemy.
+        """
         damage_done = 0
         for i in range(self.attacks_num):
             strike = random.randint(1, self.max_damage)
@@ -20,6 +41,20 @@ class Creature:
 
 
 class Enemy(Creature):
+    """
+    A class that represents an enemy creature in a game. Inherits from the Creature base class.
+
+    :ivar level: int - The level of the enemy creature.
+    :ivar intro: str - A string describing the enemy creature.
+
+    :param name: str - The name of the enemy creature.
+    :param level: int - The level of the enemy creature.
+    :param max_hp: int - The maximum hit points of the enemy creature.
+    :param attacks_num: int - The number of attacks the enemy creature can make.
+    :param max_damage: int - The maximum amount of damage the enemy creature can deal.
+    :param intro: str - A string describing the enemy creature.
+    """
+
     def __init__(self, name, level, max_hp, attacks_num, max_damage, intro):
         super().__init__(name, max_hp, attacks_num, max_damage)
         self.level = level
@@ -91,15 +126,10 @@ def choose_enemy(win_counter=0):
     """
     while True:
         monster = monsters_list[random.randint(0, len(monsters_list) - 1)]
-        if monster.level <= win_counter:  # only draws monsters with level lower on equal win counter
+        if monster.level <= win_counter:  # only chooses monsters with level lower on equal win counter
             return monster
         else:
             continue
-
-
-# test
-# for i in range(0,20):
-#     print(i, choose_enemy(10))
 
 
 def end_message(win_counter):
