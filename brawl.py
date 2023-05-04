@@ -61,14 +61,20 @@ class Enemy(Creature):
         self.intro = intro
 
 
-# create player classes
+# create player classes (name, max_hp, attacks_num, max_damage)
 warrior = Creature('Warrior', 16, 1, 10)
 rogue = Creature('Rogue', 10, 3, 4)
 mage = Creature('Mage', 8, 1, 20)
 warlock = Creature('Warlock', 14, 4, 2)
+choose_your_class = """Choose your class: 
+  1. Warrior
+  2. Rogue
+  3. Mage
+  4. Warlock
+  """
 player_char = [warrior, rogue, mage, warlock]
 
-# create monsters
+# create monsters (name, level, max_hp, attacks_num, max_damage, intro)
 bug = Enemy('Bug', 0, 1, 4, 1, "It appears that this game is full of bugs!")
 rat = Enemy('Rat', 0, 4, 2, 1, "Squeak!")
 goblin = Enemy('Goblin', 1, 8, 1, 4, "I don't have time for this...")
@@ -106,12 +112,6 @@ def choose_player_class():
     Prompts the player to choose their character class from a list of options.
     :return: obj - player's chosen character class object
     """
-    choose_your_class = """Choose your class: 
-      1. Warrior
-      2. Rogue
-      3. Mage
-      4. Warlock
-      """
     player_choice = validate_input(choose_your_class, len(player_char))
     player = player_char[int(player_choice - 1)]
 
