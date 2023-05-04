@@ -21,19 +21,12 @@ froghemoth_into = "Aaaaaughibbrgubugbugrguburgle!"
 intro_the_elder_god = "All places, all things have souls. All souls can be devoured."
 
 choose_your_class = """Choose your class: 
-  1. Fighter
+  1. Warrior
   2. Rogue
-  3. Sorcerer
+  3. Mage
   4. Warlock
   """
 
-player_char = {
-    "name": ["Fighter", "Rogue", "Sorcerer", "Warlock"],
-    "hp": [16, 10, 8, 14],
-    "max_damage": [10, 4, 20, 2],
-    "attacks": [1, 3, 1, 4],
-
-}
 monsters = {
     "name": ["Bug", "Rat", "Goblin", "Orc",
              "Owlbear", "Stone Golem", "Froghemoth", "The Elder God"],

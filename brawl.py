@@ -1,5 +1,48 @@
 import random
-from dialogues import greetings, fight_or_flight, choose_your_class, player_char, monsters
+import dialogues
+
+
+class Creature:
+    def __init__(self, name, max_hp, attacks_num, max_damage):
+        self.name = name
+        self.max_hp = max_hp
+        self.attacks_num = attacks_num
+        self.max_damage = max_damage
+        self.hp = max_hp
+
+    def damage(self, enemy):
+        damage_done = 0
+        for i in range(self.attacks_num):
+            strike = random.randint(1, self.max_damage)
+            print(f"{self.name} hit {enemy.name} for {strike} points of damage")
+            damage_done += strike
+        return damage_done
+
+
+class PlayerClass(Creature):
+    def __init__(self, name, max_hp, attacks_num, max_damage):
+        super().__init__(name, max_hp, attacks_num, max_damage)
+
+
+class Enemy(Creature):
+    def __init__(self, name, level, max_hp, attacks_num, max_damage, intro):
+        super().__init__(name, max_hp, attacks_num, max_damage)
+        self.level = level
+        self.intro = intro
+
+
+# create player classes
+warrior = PlayerClass('Warrior', 16, 1, 10)
+rogue = PlayerClass('Rogue', 10, 3, 4)
+mage = PlayerClass('Mage', 8, 1, 20)
+warlock = PlayerClass('Warlock', 14, 4, 2)
+
+# create monsters
+
+owlbear = Enemy('Owlbear', 3, 20, 1, 6, dialogues.intro_owlbear)
+
+print(Creature.damage(rogue, owlbear))
+print(Creature.damage(owlbear, warrior))
 
 
 def validate_input(message, num=2):
@@ -40,7 +83,7 @@ def choose_player_class():
 
 def choose_monster(win_counter):
     """
-    Generates random monster form the list base on win counter, returns monster stats.
+    Generates random monster form the list based on win counter, returns monster stats.
     :param win_counter: int - number of battles won
     :return: tuple (string, string, int, int, int) - monster stats
     """
@@ -131,8 +174,7 @@ def fight():
                     print("You both died.")
                     return end_message(win_counter)
 
-
 # print(validate_input(message, 4))
 # print(choose_player_class())
 
-print(fight())
+# print(fight())
