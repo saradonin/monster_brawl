@@ -156,10 +156,11 @@ def end_message(win_counter):
 
 def fight():
     """
-    This is where the fight happens.
+    Simulates a fight between the player and enemies.
     :return: str - end message
     """
-    print("Greetings adventurer! \nNavigate through the game using buttons from [1] to [4] on your keyboard.\n")
+    print("Greetings adventurer!")
+    print("Navigate through the game using buttons from [1] to [4] on your keyboard.\n")
     player = choose_player_class()
 
     win_counter = 0
@@ -176,8 +177,7 @@ Fight or flight?
             enemy = choose_enemy(win_counter)
             player.hp = player.max_hp
 
-
-            while player.hp > 0 and enemy.hp > 0:
+            while enemy.hp > 0:
                 # monster attack turn
                 monster_damage_done = enemy.damage(player)
                 player.hp -= monster_damage_done
@@ -190,9 +190,16 @@ Fight or flight?
                 else:
                     print(f"You lost. {enemy.name} won.")
                     return end_message(win_counter)
-            else:
-                print("You won!")
-                win_counter += 1
+
+            print("You won!")
+            win_counter += 1
 
 
-print(fight())
+def main():
+    end_message = fight()
+    print(end_message)
+
+
+# start the game
+if __name__ == "__main__":
+    main()
