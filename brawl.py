@@ -106,7 +106,7 @@ hobgoblin = Enemy('Hobgoblin', 3, 18, 1, 8)
 ghoul = Enemy('Ghoul', 3, 22, 1, 4)
 mimic = Enemy('Mimic', 3, 58, 2, 4, "What’s in the box?")
 orc = Enemy('Orc', 3, 16, 1, 16, "Victory or death! Aaaaarghh!")
-violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 4)
+violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 3)
 
 # level 4
 basilisk = Enemy('Basilisk', 4, 52, 1, 6)
@@ -179,7 +179,7 @@ def choose_enemy(player_level=1):
         enemy = monsters_list[random.randint(0, len(monsters_list) - 1)]
         # ignores enemies way too easy or too hard
         if player_level - 2 <= enemy.level <= player_level + 1:
-            print(f"You encountered {enemy.name} (level: {enemy.level}): {enemy.intro}")
+            print(f"You encountered {enemy.name} (level {enemy.level}): {enemy.intro}")
             enemy.hp = enemy.max_hp
             return enemy
 
