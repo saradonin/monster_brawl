@@ -12,7 +12,7 @@ class Creature:
     :ivar attacks_num: int - The number of attacks the creature can make.
     :ivar max_damage: int - The maximum amount of damage the creature can deal.
     :ivar hp: int - The current hit points of the creature, initialized to max_hp.
-    :ivar level: int - The level of the enemy creature.
+    :ivar level: int - The level of the creature.
 
     :param name: str - The name of the creature.
     :param max_hp: int - The maximum hit points of the creature.
@@ -46,11 +46,11 @@ class Creature:
         return damage_done
 
     def level_up(self):
-        modifier = 1.5
+        modifier = 1.2
         self.level += 1
-        print(f"You reached level {self.level}!")
-        self.max_hp = math.ceil(self.max_hp * modifier)
+        self.max_hp = math.ceil(self.max_hp * modifier + self.level * 2)
         self.max_damage = math.ceil(self.max_damage * modifier)
+        return f"You reached level {self.level}!"
 
 
 class Enemy(Creature):
@@ -105,7 +105,7 @@ stone_golem = Enemy('Stone Golem', 32, 1, 3, 4, "Flesh. Weak. Return to the eart
 froghemoth = Enemy('Froghemoth', 60, 2, 4, 4, "Aaaaaughibbrgubugbugrguburgle!")
 # level 5
 beholder = Enemy('Beholder', 40, 1, 40, 5, "All places, all things have souls. All souls can be devoured.")
-# lecel 7
+# level 7
 elder_god = Enemy('The Elder God', 1023, 1, 255, 7, "Release your grip on hope!")
 
 # create a list of monsters using gc module
@@ -144,18 +144,17 @@ def choose_player_class():
     return player
 
 
-def choose_enemy(win_counter=0):
+def choose_enemy(player_level=1):
     """
-    Generates random monster form the list based on win counter, returns monster stats.
-    :param win_counter: int - number of battles won
+    Returns random monster form the list based on player level.
+    :param player_level: int
     :return: obj - enemy creature randomly generated object
     """
     while True:
         enemy = monsters_list[random.randint(0, len(monsters_list) - 1)]
-        if enemy.level > win_counter:  # only chooses monsters with level lower on equal win counter
-            continue
-        else:
-            print(f"You encountered {enemy.name}: {enemy.intro}")
+        # ignores enemies way too easy or too hard
+        if player_level - 2 <= enemy.level <= player_level + 1:
+            print(f"You encountered {enemy.name} (level: {enemy.level}): {enemy.intro}")
             enemy.hp = enemy.max_hp
             return enemy
 
@@ -194,7 +193,7 @@ Fight or flight?
         if decision == 2:
             return "Ok then, bye! Come back later."
         elif decision == 1:
-            enemy = choose_enemy(win_counter)
+            enemy = choose_enemy(player.level)
             player.hp = player.max_hp
 
             # monster attack turn if alive
@@ -215,7 +214,7 @@ Fight or flight?
             win_counter += 1
             # level up every 5 wins
             if not win_counter % 5:
-                player.level_up()
+                print(player.level_up())
 
 
 def main():
