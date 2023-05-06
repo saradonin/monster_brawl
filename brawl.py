@@ -3,7 +3,6 @@ import math
 import gc
 
 
-
 class Creature:
     """
     A base class that represents a creature in a game.
@@ -41,12 +40,11 @@ class Creature:
         damage_done = 0
         for i in range(self.attacks_num):
             strike = random.randint(1, self.max_damage)
+            damage_type = self.damage_type[random.randint(0, len(self.damage_type) - 1)]
             if self in player_char:
-                type = self.damage_type[random.randint(0, len(self.damage_type) - 1)]
-                print(f"You hit {enemy.name} for {strike} points of {type} damage")
+                print(f"You hit {enemy.name} for {strike} points of {damage_type} damage")
             elif enemy in player_char:
-                type = self.damage_type[random.randint(0, len(self.damage_type) - 1)]
-                print(f"{self.name} hit you for {strike} points of {type} damage")
+                print(f"{self.name} hit you for {strike} points of {damage_type} damage")
             damage_done += strike
         return damage_done
 
@@ -94,7 +92,7 @@ THUNDER = 'Thunder'
 
 # create player classes (name, level, max_hp, attacks_num, max_damage)
 fighter = Creature('Fighter', 1, 16, 1, 10, (BLUDGEONING, SLASHING))
-rogue = Creature('Rogue', 1, 10, 3, 4, (PIERCING, POISON))
+rogue = Creature('Rogue', 1, 12, 3, 4, (PIERCING, POISON))
 sorcerer = Creature('Sorcerer', 1, 8, 1, 20, (COLD, FIRE, FORCE))
 warlock = Creature('Warlock', 1, 14, 4, 2, (FORCE, NECROTIC, PSYCHIC))
 choose_your_class = """Choose your class: 
@@ -109,7 +107,7 @@ player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not
 # create monsters Enemy('name, level, max_hp, attacks_num, max_damage, 'intro')
 # level 0
 bug = Enemy('Bug', 0, 2, 4, 1, (ACID, PIERCING), "It appears that this game is full of bugs!")
-duckbunny = Enemy('Duckbunny', 0, 2, 1, 1, (PIERCING, PIERCING),
+duckbunny = Enemy('Duckbunny', 0, 2, 1, 1, (BLUDGEONING, PIERCING),
                   "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
 # level 1
 kobold = Enemy('Kobold', 1, 5, 1, 4, (BLUDGEONING, PIERCING))
@@ -118,13 +116,13 @@ goblin = Enemy('Goblin', 2, 8, 1, 4, (PIERCING, SLASHING), "I don't have time fo
 
 # level 2
 bandit = Enemy('Bandit', 2, 11, 1, 8, (PIERCING, SLASHING))
-poisonous_snake = Enemy('Poisonous Snake', 2, 12, 4, 2, (PIERCING, POISON),"Sssss...")
+poisonous_snake = Enemy('Poisonous Snake', 2, 12, 4, 2, (PIERCING, POISON), "Sssss...")
 skeleton = Enemy('Skeleton', 2, 12, 1, 6, (BLUDGEONING, PIERCING))
 
 # level 3
 hobgoblin = Enemy('Hobgoblin', 3, 18, 1, 8, (PIERCING, SLASHING))
 ghoul = Enemy('Ghoul', 3, 22, 1, 4, (PIERCING, SLASHING))
-mimic = Enemy('Mimic', 3, 58, 2, 4, (BLUDGEONING, THUNDER), "What’s in the box?")
+mimic = Enemy('Mimic', 3, 58, 2, 4, (BLUDGEONING, LIGHTNING), "What’s in the box?")
 orc = Enemy('Orc', 3, 16, 1, 16, (PIERCING, SLASHING), "Victory or death!")
 violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 3, (NECROTIC, POISON))
 
@@ -136,26 +134,27 @@ ogre = Enemy('Ogre', 4, 50, 1, 13, (BLUDGEONING, BLUDGEONING), "Stupid puny thin
 
 # level 5
 ghost = Enemy('Ghost', 5, 45, 1, 17, (FORCE, NECROTIC), "Whoo-oo-oo-oo...")
-stone_golem = Enemy('Stone Golem', 5, 93, 1, 6, (BLUDGEONING, BLUDGEONING),"Flesh. Weak. Return to the earth.")
+stone_golem = Enemy('Stone Golem', 5, 93, 1, 6, (BLUDGEONING, BLUDGEONING), "Flesh. Weak. Return to the earth.")
 
 # level 6
 troll = Enemy('Troll', 6, 84, 3, 7, (PIERCING, SLASHING))
 chimera = Enemy('Chimera', 6, 114, 1, 12, (BLUDGEONING, PIERCING, SLASHING))
 
 # level 7
-black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, (ACID, SLASHING),"You and the others, you owe me awe.")
+black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, (ACID, SLASHING), "You and the others, you owe me awe.")
 froghemoth = Enemy('Froghemoth', 7, 80, 2, 12, (ACID, BLUDGEONING), "Aaaaaughibbrgubugbugrguburgle!")
 
 # level 8
 hydra = Enemy('Hydra', 8, 172, 3, 10, (PIERCING, COLD))
-beholder = Enemy('Beholder', 8, 180, 1, 36, (FORCE, NECROTIC), "All places, all things have souls. All souls can be devoured.")
+beholder = Enemy('Beholder', 8, 180, 1, 36, (FORCE, NECROTIC),
+                 "All places, all things have souls. All souls can be devoured.")
 
 # level 9
 demon = Enemy('Demon', 9, 262, 4, 6, (FIRE, SLASHING))
 
 # level 10
 elder_god = Enemy('The Elder God', 10, 800, 1, 150, (FORCE, PSYCHIC), "Release your grip on hope!")
-kraken = Enemy('Kraken', 10, 472, 3, 40, (PIERCING, THUNDER))
+kraken = Enemy('Kraken', 10, 472, 3, 40, (PIERCING, LIGHTNING))
 
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
