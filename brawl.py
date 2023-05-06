@@ -12,6 +12,7 @@ class Creature:
     :ivar attacks_num: int - The number of attacks the creature can make.
     :ivar max_damage: int - The maximum amount of damage the creature can deal.
     :ivar hp: int - The current hit points of the creature, initialized to max_hp.
+    :ivar level: int - The level of the enemy creature.
 
     :param name: str - The name of the creature.
     :param max_hp: int - The maximum hit points of the creature.
@@ -25,7 +26,6 @@ class Creature:
         self.attacks_num = attacks_num
         self.max_damage = max_damage
         self.level = level
-
         self.hp = max_hp
 
     def damage(self, enemy):
@@ -48,6 +48,7 @@ class Creature:
     def level_up(self):
         modifier = 1.5
         self.level += 1
+        print(f"You reached level {self.level}!")
         self.max_hp = math.ceil(self.max_hp * modifier)
         self.max_damage = math.ceil(self.max_damage * modifier)
 
@@ -56,7 +57,6 @@ class Enemy(Creature):
     """
     A class that represents an enemy creature in a game. Inherits from the Creature base class.
 
-    :ivar level: int - The level of the enemy creature.
     :ivar intro: str - A string describing the enemy creature.
 
     :param name: str - The name of the enemy creature.
@@ -86,12 +86,11 @@ choose_your_class = """Choose your class:
 # create a list of player classes using gc module
 player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
-
 # create monsters Enemy(‘name’, max_hp, attacks_num, max_damage, level, ‘intro’)
 # level 0
 bug = Enemy('Bug', 1, 4, 1, 0, "It appears that this game is full of bugs!")
-duckbunny = Enemy('Duckbunny', 2, 1, 1, 0, "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
-
+duckbunny = Enemy('Duckbunny', 2, 1, 1, 0,
+                  "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
 rat = Enemy('Rat', 4, 2, 1, 0, "Squeak!")
 # level 1
 goblin = Enemy('Goblin', 8, 1, 4, 1, "I don't have time for this...")
@@ -109,9 +108,9 @@ beholder = Enemy('Beholder', 40, 1, 40, 5, "All places, all things have souls. A
 # lecel 7
 elder_god = Enemy('The Elder God', 1023, 1, 255, 7, "Release your grip on hope!")
 
-
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
+
 
 def validate_input(message, num=2):
     """
@@ -153,12 +152,12 @@ def choose_enemy(win_counter=0):
     """
     while True:
         enemy = monsters_list[random.randint(0, len(monsters_list) - 1)]
-        if enemy.level <= win_counter:  # only chooses monsters with level lower on equal win counter
+        if enemy.level > win_counter:  # only chooses monsters with level lower on equal win counter
+            continue
+        else:
             print(f"You encountered {enemy.name}: {enemy.intro}")
             enemy.hp = enemy.max_hp
             return enemy
-        else:
-            continue
 
 
 def end_message(win_counter):
@@ -167,9 +166,9 @@ def end_message(win_counter):
     :param win_counter: int - number of battles won
     :return: str - text message
     """
-    if win_counter > 5:
+    if win_counter > 8:
         return f"You won {win_counter} battles today! Glorious! Songs of your victories will be sung in every inn."
-    elif win_counter >= 3:
+    elif win_counter >= 4:
         return f"You won {win_counter} battles today. Not bad for a novice."
     else:
         return f"You won {win_counter} battles today. What a shame."
@@ -214,23 +213,16 @@ Fight or flight?
 
             print("You won!")
             win_counter += 1
+            # level up every 5 wins
+            if not win_counter % 5:
+                player.level_up()
 
 
-# def main():
-#     game_end = fight()
-#     print(game_end)
-#
-#
-# # start the game
-# if __name__ == "__main__":
-#     main()
+def main():
+    game_end = fight()
+    print(game_end)
 
-fighter.level_up()
-fighter.level_up()
-fighter.level_up()
-fighter.level_up()
-print(fighter.level, fighter.max_hp, fighter.max_damage)
-sorcerer.level_up()
-print(sorcerer.max_hp, sorcerer.max_damage)
-warlock.level_up()
-print(warlock.max_hp, warlock.max_damage)
+
+# start the game
+if __name__ == "__main__":
+    main()
