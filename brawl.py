@@ -1,4 +1,5 @@
 import random
+import math
 import gc
 
 
@@ -18,11 +19,12 @@ class Creature:
     :param max_damage: int - The maximum amount of damage the creature can deal.
     """
 
-    def __init__(self, name, max_hp, attacks_num, max_damage):
+    def __init__(self, name, max_hp, attacks_num, max_damage, level=1):
         self.name = name
         self.max_hp = max_hp
         self.attacks_num = attacks_num
         self.max_damage = max_damage
+        self.level = level
 
         self.hp = max_hp
 
@@ -43,6 +45,12 @@ class Creature:
             damage_done += strike
         return damage_done
 
+    def level_up(self):
+        modifier = 1.5
+        self.level += 1
+        self.max_hp = math.ceil(self.max_hp * modifier)
+        self.max_damage = math.ceil(self.max_damage * modifier)
+
 
 class Enemy(Creature):
     """
@@ -60,49 +68,50 @@ class Enemy(Creature):
     """
 
     def __init__(self, name, level, max_hp, attacks_num, max_damage, intro):
-        super().__init__(name, max_hp, attacks_num, max_damage)
-        self.level = level
+        super().__init__(name, level, max_hp, attacks_num, max_damage)
         self.intro = intro
 
 
 # create player classes (name, max_hp, attacks_num, max_damage)
-warrior = Creature('Warrior', 16, 1, 10)
+fighter = Creature('Fighter', 16, 1, 10)
 rogue = Creature('Rogue', 10, 3, 4)
-mage = Creature('Mage', 8, 1, 20)
+sorcerer = Creature('Sorcerer', 8, 1, 20)
 warlock = Creature('Warlock', 14, 4, 2)
 choose_your_class = """Choose your class: 
-  1. Warrior
+  1. Fighter
   2. Rogue
-  3. Mage
+  3. Sorcerer
   4. Warlock
   """
 # create a list of player classes using gc module
 player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
-# create monsters Enemy(‘name’, level, max_hp, attacks_num, max_damage, ‘intro’)
+
+# create monsters Enemy(‘name’, max_hp, attacks_num, max_damage, level, ‘intro’)
 # level 0
-bug = Enemy('Bug', 0, 1, 4, 1, "It appears that this game is full of bugs!")
-duckbunny = Enemy('Duckbunny', 0, 2, 1, 1, "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
-rat = Enemy('Rat', 0, 4, 2, 1, "Squeak!")
+bug = Enemy('Bug', 1, 4, 1, 0, "It appears that this game is full of bugs!")
+duckbunny = Enemy('Duckbunny', 2, 1, 1, 0, "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
+
+rat = Enemy('Rat', 4, 2, 1, 0, "Squeak!")
 # level 1
-goblin = Enemy('Goblin', 1, 8, 1, 4, "I don't have time for this...")
-gelatinous_cube = Enemy('Gelatinous Cube', 1, 16, 1, 2, "Bloop!")
+goblin = Enemy('Goblin', 8, 1, 4, 1, "I don't have time for this...")
+gelatinous_cube = Enemy('Gelatinous Cube', 16, 1, 2, 1, "Bloop!")
 # level 2
-mimic = Enemy('Mimic', 2, 16, 2, 4, "What’s in the box?")
-orc = Enemy('Orc', 2, 16, 1, 8, "Victory or death! Aaaaarghh!")
+mimic = Enemy('Mimic', 16, 2, 4, 2, "What’s in the box?")
+orc = Enemy('Orc', 16, 1, 8, 2, "Victory or death! Aaaaarghh!")
 # level 3
-owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
+owlbear = Enemy('Owlbear', 20, 1, 6, 3, "HOOT-GROWL!")
 # level 4
-stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
-froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
+stone_golem = Enemy('Stone Golem', 32, 1, 3, 4, "Flesh. Weak. Return to the earth.")
+froghemoth = Enemy('Froghemoth', 60, 2, 4, 4, "Aaaaaughibbrgubugbugrguburgle!")
 # level 5
-beholder = Enemy('Beholder', 5, 40, 1, 40, "All places, all things have souls. All souls can be devoured.")
+beholder = Enemy('Beholder', 40, 1, 40, 5, "All places, all things have souls. All souls can be devoured.")
 # lecel 7
-elder_god = Enemy('The Elder God', 7, 1023, 1, 255, "Release your grip on hope!")
+elder_god = Enemy('The Elder God', 1023, 1, 255, 7, "Release your grip on hope!")
+
 
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
-
 
 def validate_input(message, num=2):
     """
@@ -207,11 +216,21 @@ Fight or flight?
             win_counter += 1
 
 
-def main():
-    game_end = fight()
-    print(game_end)
+# def main():
+#     game_end = fight()
+#     print(game_end)
+#
+#
+# # start the game
+# if __name__ == "__main__":
+#     main()
 
-
-# start the game
-if __name__ == "__main__":
-    main()
+fighter.level_up()
+fighter.level_up()
+fighter.level_up()
+fighter.level_up()
+print(fighter.level, fighter.max_hp, fighter.max_damage)
+sorcerer.level_up()
+print(sorcerer.max_hp, sorcerer.max_damage)
+warlock.level_up()
+print(warlock.max_hp, warlock.max_damage)
