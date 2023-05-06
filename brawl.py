@@ -67,7 +67,7 @@ class Enemy(Creature):
     :param intro: str - A string describing the enemy creature.
     """
 
-    def __init__(self, name, level, max_hp, attacks_num, max_damage, intro):
+    def __init__(self, name, level, max_hp, attacks_num, max_damage, intro=""):
         super().__init__(name, level, max_hp, attacks_num, max_damage)
         self.intro = intro
 
@@ -87,26 +87,44 @@ choose_your_class = """Choose your class:
 player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
 # create monsters Enemy(‘name’, level, max_hp, attacks_num, max_damage, ‘intro’)
-# level 1
-bug = Enemy('Bug', 1, 1, 4, 1, "It appears that this game is full of bugs!")
-duckbunny = Enemy('Duckbunny', 1, 2, 1, 1,
+# level 0
+bug = Enemy('Bug', 0, 2, 4, 1, "It appears that this game is full of bugs!")
+duckbunny = Enemy('Duckbunny', 0, 2, 1, 1,
                   "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
-rat = Enemy('Rat', 1, 4, 2, 1, "Squeak!")
-# level 2
+# level 1
+rat = Enemy('Giant Rat', 1, 6, 2, 1, "Squeak!")
 goblin = Enemy('Goblin', 2, 8, 1, 4, "I don't have time for this...")
+
+# level 2
 gelatinous_cube = Enemy('Gelatinous Cube', 2, 16, 1, 2, "Bloop!")
+skeleton = Enemy('Skeleton', 2, 12, 1, 6, "")
+
 # level 3
-mimic = Enemy('Mimic', 3, 16, 2, 4, "What’s in the box?")
-orc = Enemy('Orc', 3, 16, 1, 8, "Victory or death! Aaaaarghh!")
+mimic = Enemy('Mimic', 3, 58, 2, 4, "What’s in the box?")
+orc = Enemy('Orc', 3, 16, 1, 16, "Victory or death! Aaaaarghh!")
+
 # level 4
-owlbear = Enemy('Owlbear', 4, 20, 1, 6, "HOOT-GROWL!")
+basilisk = Enemy('Basilisk', 4, 52, 1, 6)
+owlbear = Enemy('Owlbear', 4, 59, 1, 10, "HOOT-GROWL!")
+
 # level 5
-stone_golem = Enemy('Stone Golem', 5, 32, 1, 3, "Flesh. Weak. Return to the earth.")
-froghemoth = Enemy('Froghemoth', 5, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
+ghost = Enemy('Ghost', 5, 45, 1, 17, "Whoo-oo-oo-oo...")
+stone_golem = Enemy('Stone Golem', 5, 93, 1, 6, "Flesh. Weak. Return to the earth.")
+
 # level 6
-beholder = Enemy('Beholder', 6, 40, 1, 40, "All places, all things have souls. All souls can be devoured.")
+troll = Enemy('Troll', 6, 84, 3, 7, "")
+chimera = Enemy('Chimera', 6, 114, 1, 12, "")
+
+# level 7
+black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, "")
+froghemoth = Enemy('Froghemoth', 7, 80, 2, 12, "Aaaaaughibbrgubugbugrguburgle!")
+
+# level 8
+hydra = Enemy('Hydra', 8, 172, 3, 10, "")
+beholder = Enemy('Beholder', 8, 180, 1, 36, "All places, all things have souls. All souls can be devoured.")
+
 # level 10
-elder_god = Enemy('The Elder God', 10, 1023, 1, 255, "Release your grip on hope!")
+elder_god = Enemy('The Elder God', 10, 800, 1, 150, "Release your grip on hope!")
 
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
