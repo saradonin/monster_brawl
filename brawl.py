@@ -20,7 +20,7 @@ class Creature:
     :param max_damage: int - The maximum amount of damage the creature can deal.
     """
 
-    def __init__(self, name, max_hp, attacks_num, max_damage, level=1):
+    def __init__(self, name, level, max_hp, attacks_num, max_damage):
         self.name = name
         self.max_hp = max_hp
         self.attacks_num = attacks_num
@@ -72,11 +72,11 @@ class Enemy(Creature):
         self.intro = intro
 
 
-# create player classes (name, max_hp, attacks_num, max_damage)
-fighter = Creature('Fighter', 16, 1, 10)
-rogue = Creature('Rogue', 10, 3, 4)
-sorcerer = Creature('Sorcerer', 8, 1, 20)
-warlock = Creature('Warlock', 14, 4, 2)
+# create player classes (name, level, max_hp, attacks_num, max_damage)
+fighter = Creature('Fighter', 1, 16, 1, 10)
+rogue = Creature('Rogue', 1, 10, 3, 4)
+sorcerer = Creature('Sorcerer', 1, 8, 1, 20)
+warlock = Creature('Warlock', 1, 14, 4, 2)
 choose_your_class = """Choose your class: 
   1. Fighter
   2. Rogue
@@ -86,27 +86,27 @@ choose_your_class = """Choose your class:
 # create a list of player classes using gc module
 player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
-# create monsters Enemy(‘name’, max_hp, attacks_num, max_damage, level, ‘intro’)
-# level 0
-bug = Enemy('Bug', 1, 4, 1, 0, "It appears that this game is full of bugs!")
-duckbunny = Enemy('Duckbunny', 2, 1, 1, 0,
-                  "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
-rat = Enemy('Rat', 4, 2, 1, 0, "Squeak!")
+# create monsters Enemy(‘name’, level, max_hp, attacks_num, max_damage, ‘intro’)
 # level 1
-goblin = Enemy('Goblin', 8, 1, 4, 1, "I don't have time for this...")
-gelatinous_cube = Enemy('Gelatinous Cube', 16, 1, 2, 1, "Bloop!")
+bug = Enemy('Bug', 1, 1, 4, 1, "It appears that this game is full of bugs!")
+duckbunny = Enemy('Duckbunny', 1, 2, 1, 1,
+                  "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
+rat = Enemy('Rat', 1, 4, 2, 1, "Squeak!")
 # level 2
-mimic = Enemy('Mimic', 16, 2, 4, 2, "What’s in the box?")
-orc = Enemy('Orc', 16, 1, 8, 2, "Victory or death! Aaaaarghh!")
+goblin = Enemy('Goblin', 2, 8, 1, 4, "I don't have time for this...")
+gelatinous_cube = Enemy('Gelatinous Cube', 2, 16, 1, 2, "Bloop!")
 # level 3
-owlbear = Enemy('Owlbear', 20, 1, 6, 3, "HOOT-GROWL!")
+mimic = Enemy('Mimic', 3, 16, 2, 4, "What’s in the box?")
+orc = Enemy('Orc', 3, 16, 1, 8, "Victory or death! Aaaaarghh!")
 # level 4
-stone_golem = Enemy('Stone Golem', 32, 1, 3, 4, "Flesh. Weak. Return to the earth.")
-froghemoth = Enemy('Froghemoth', 60, 2, 4, 4, "Aaaaaughibbrgubugbugrguburgle!")
+owlbear = Enemy('Owlbear', 4, 20, 1, 6, "HOOT-GROWL!")
 # level 5
-beholder = Enemy('Beholder', 40, 1, 40, 5, "All places, all things have souls. All souls can be devoured.")
-# level 7
-elder_god = Enemy('The Elder God', 1023, 1, 255, 7, "Release your grip on hope!")
+stone_golem = Enemy('Stone Golem', 5, 32, 1, 3, "Flesh. Weak. Return to the earth.")
+froghemoth = Enemy('Froghemoth', 5, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
+# level 6
+beholder = Enemy('Beholder', 6, 40, 1, 40, "All places, all things have souls. All souls can be devoured.")
+# level 10
+elder_god = Enemy('The Elder God', 10, 1023, 1, 255, "Release your grip on hope!")
 
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
