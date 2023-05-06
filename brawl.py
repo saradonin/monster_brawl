@@ -3,6 +3,7 @@ import math
 import gc
 
 
+
 class Creature:
     """
     A base class that represents a creature in a game.
@@ -20,13 +21,14 @@ class Creature:
     :param max_damage: int - The maximum amount of damage the creature can deal.
     """
 
-    def __init__(self, name, level, max_hp, attacks_num, max_damage):
+    def __init__(self, name, level, max_hp, attacks_num, max_damage, damage_type=()):
         self.name = name
         self.max_hp = max_hp
         self.attacks_num = attacks_num
         self.max_damage = max_damage
         self.level = level
         self.hp = max_hp
+        self.damage_type = damage_type
 
     def damage(self, enemy):
         """
@@ -35,13 +37,16 @@ class Creature:
         :param enemy: obj - the enemy that the creature is attacking
         :return: int - total amount of damage dealt to the enemy
         """
+
         damage_done = 0
         for i in range(self.attacks_num):
             strike = random.randint(1, self.max_damage)
             if self in player_char:
-                print(f"You hit {enemy.name} for {strike} points of damage")
+                type = self.damage_type[random.randint(0, len(self.damage_type) - 1)]
+                print(f"You hit {enemy.name} for {strike} points of {type} damage")
             elif enemy in player_char:
-                print(f"{self.name} hit you for {strike} points of damage")
+                type = self.damage_type[random.randint(0, len(self.damage_type) - 1)]
+                print(f"{self.name} hit you for {strike} points of {type} damage")
             damage_done += strike
         return damage_done
 
@@ -67,16 +72,31 @@ class Enemy(Creature):
     :param intro: str - A string describing the enemy creature.
     """
 
-    def __init__(self, name, level, max_hp, attacks_num, max_damage, intro=""):
-        super().__init__(name, level, max_hp, attacks_num, max_damage)
+    def __init__(self, name, level, max_hp, attacks_num, max_damage, damage_type=(), intro=""):
+        super().__init__(name, level, max_hp, attacks_num, max_damage, damage_type)
         self.intro = intro
 
 
+# DND damage types
+ACID = 'Acid'
+BLUDGEONING = 'Bludgeoning'
+COLD = 'Cold'
+FIRE = 'Fire'
+FORCE = 'Force'
+LIGHTNING = 'Lightning'
+NECROTIC = 'Necrotic'
+PIERCING = 'Piercing'
+POISON = 'Poison'
+PSYCHIC = 'Psychic'
+RADIANT = 'Radiant'
+SLASHING = 'Slashing'
+THUNDER = 'Thunder'
+
 # create player classes (name, level, max_hp, attacks_num, max_damage)
-fighter = Creature('Fighter', 1, 16, 1, 10)
-rogue = Creature('Rogue', 1, 10, 3, 4)
-sorcerer = Creature('Sorcerer', 1, 8, 1, 20)
-warlock = Creature('Warlock', 1, 14, 4, 2)
+fighter = Creature('Fighter', 1, 16, 1, 10, (BLUDGEONING, SLASHING))
+rogue = Creature('Rogue', 1, 10, 3, 4, (PIERCING, POISON))
+sorcerer = Creature('Sorcerer', 1, 8, 1, 20, (COLD, FIRE, FORCE))
+warlock = Creature('Warlock', 1, 14, 4, 2, (FORCE, NECROTIC, PSYCHIC))
 choose_your_class = """Choose your class: 
   1. Fighter
   2. Rogue
@@ -88,54 +108,54 @@ player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not
 
 # create monsters Enemy('name, level, max_hp, attacks_num, max_damage, 'intro')
 # level 0
-bug = Enemy('Bug', 0, 2, 4, 1, "It appears that this game is full of bugs!")
-duckbunny = Enemy('Duckbunny', 0, 2, 1, 1,
+bug = Enemy('Bug', 0, 2, 4, 1, (ACID, PIERCING), "It appears that this game is full of bugs!")
+duckbunny = Enemy('Duckbunny', 0, 2, 1, 1, (PIERCING, PIERCING),
                   "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
 # level 1
-kobold = Enemy('Kobold', 1, 5, 1, 4)
-giant_rat = Enemy('Giant Rat', 1, 6, 2, 1, "Squeak!")
-goblin = Enemy('Goblin', 2, 8, 1, 4, "I don't have time for this...")
+kobold = Enemy('Kobold', 1, 5, 1, 4, (BLUDGEONING, PIERCING))
+giant_rat = Enemy('Giant Rat', 1, 6, 2, 1, (PIERCING, PIERCING), "Squeak!")
+goblin = Enemy('Goblin', 2, 8, 1, 4, (PIERCING, SLASHING), "I don't have time for this...")
 
 # level 2
-bandit = Enemy('Bandit', 2, 11, 1, 8)
-poisonous_snake = Enemy('Poisonous Snake', 2, 12, 4, 2, "Sssss...")
-skeleton = Enemy('Skeleton', 2, 12, 1, 6)
+bandit = Enemy('Bandit', 2, 11, 1, 8, (PIERCING, SLASHING))
+poisonous_snake = Enemy('Poisonous Snake', 2, 12, 4, 2, (PIERCING, POISON),"Sssss...")
+skeleton = Enemy('Skeleton', 2, 12, 1, 6, (BLUDGEONING, PIERCING))
 
 # level 3
-hobgoblin = Enemy('Hobgoblin', 3, 18, 1, 8)
-ghoul = Enemy('Ghoul', 3, 22, 1, 4)
-mimic = Enemy('Mimic', 3, 58, 2, 4, "What’s in the box?")
-orc = Enemy('Orc', 3, 16, 1, 16, "Victory or death!")
-violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 3)
+hobgoblin = Enemy('Hobgoblin', 3, 18, 1, 8, (PIERCING, SLASHING))
+ghoul = Enemy('Ghoul', 3, 22, 1, 4, (PIERCING, SLASHING))
+mimic = Enemy('Mimic', 3, 58, 2, 4, (BLUDGEONING, THUNDER), "What’s in the box?")
+orc = Enemy('Orc', 3, 16, 1, 16, (PIERCING, SLASHING), "Victory or death!")
+violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 3, (NECROTIC, POISON))
 
 # level 4
-basilisk = Enemy('Basilisk', 4, 52, 1, 6)
-gelatinous_cube = Enemy('Gelatinous Cube', 4, 84, 1, 2, "Bloop!")
-owlbear = Enemy('Owlbear', 4, 59, 1, 10, "HOOT-GROWL!")
-ogre = Enemy('Ogre', 4, 50, 1, 13, "Stupid puny thing! Me smash!")
+basilisk = Enemy('Basilisk', 4, 52, 1, 6, (PIERCING, POISON))
+gelatinous_cube = Enemy('Gelatinous Cube', 4, 84, 1, 2, (ACID, FORCE), "Bloop!")
+owlbear = Enemy('Owlbear', 4, 59, 1, 10, (PIERCING, SLASHING), "HOOT-GROWL!")
+ogre = Enemy('Ogre', 4, 50, 1, 13, (BLUDGEONING, BLUDGEONING), "Stupid puny thing! Me smash!")
 
 # level 5
-ghost = Enemy('Ghost', 5, 45, 1, 17, "Whoo-oo-oo-oo...")
-stone_golem = Enemy('Stone Golem', 5, 93, 1, 6, "Flesh. Weak. Return to the earth.")
+ghost = Enemy('Ghost', 5, 45, 1, 17, (FORCE, NECROTIC), "Whoo-oo-oo-oo...")
+stone_golem = Enemy('Stone Golem', 5, 93, 1, 6, (BLUDGEONING, BLUDGEONING),"Flesh. Weak. Return to the earth.")
 
 # level 6
-troll = Enemy('Troll', 6, 84, 3, 7, "")
-chimera = Enemy('Chimera', 6, 114, 1, 12, "")
+troll = Enemy('Troll', 6, 84, 3, 7, (PIERCING, SLASHING))
+chimera = Enemy('Chimera', 6, 114, 1, 12, (BLUDGEONING, PIERCING, SLASHING))
 
 # level 7
-black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, "You and the others, you owe me awe.")
-froghemoth = Enemy('Froghemoth', 7, 80, 2, 12, "Aaaaaughibbrgubugbugrguburgle!")
+black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, (ACID, SLASHING),"You and the others, you owe me awe.")
+froghemoth = Enemy('Froghemoth', 7, 80, 2, 12, (ACID, BLUDGEONING), "Aaaaaughibbrgubugbugrguburgle!")
 
 # level 8
-hydra = Enemy('Hydra', 8, 172, 3, 10, "")
-beholder = Enemy('Beholder', 8, 180, 1, 36, "All places, all things have souls. All souls can be devoured.")
+hydra = Enemy('Hydra', 8, 172, 3, 10, (PIERCING, COLD))
+beholder = Enemy('Beholder', 8, 180, 1, 36, (FORCE, NECROTIC), "All places, all things have souls. All souls can be devoured.")
 
 # level 9
-demon = Enemy('Demon', 9, 262, 4, 6)
+demon = Enemy('Demon', 9, 262, 4, 6, (FIRE, SLASHING))
 
 # level 10
-elder_god = Enemy('The Elder God', 10, 800, 1, 150, "Release your grip on hope!")
-kraken = Enemy('Kraken', 10, 472, 3, 40)
+elder_god = Enemy('The Elder God', 10, 800, 1, 150, (FORCE, PSYCHIC), "Release your grip on hope!")
+kraken = Enemy('Kraken', 10, 472, 3, 40, (PIERCING, THUNDER))
 
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
