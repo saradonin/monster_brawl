@@ -86,7 +86,7 @@ choose_your_class = """Choose your class:
 # create a list of player classes using gc module
 player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
-# create monsters Enemy(‘name’, level, max_hp, attacks_num, max_damage, ‘intro’)
+# create monsters Enemy('name, level, max_hp, attacks_num, max_damage, 'intro')
 # level 0
 bug = Enemy('Bug', 0, 2, 4, 1, "It appears that this game is full of bugs!")
 duckbunny = Enemy('Duckbunny', 0, 2, 1, 1,
@@ -195,9 +195,9 @@ def end_message(win_counter):
     :return: str - text message
     """
     if win_counter > 8:
-        return f"You won {win_counter} battles today! Glorious! Songs of your victories will be sung in every inn."
+        return f"You won {win_counter} battles today! Glorious!"
     elif win_counter >= 4:
-        return f"You won {win_counter} battles today. Not bad for a novice."
+        return f"You won {win_counter} battles today."
     else:
         return f"You won {win_counter} battles today. What a shame."
 
