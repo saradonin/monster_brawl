@@ -1,4 +1,5 @@
 import random
+import gc
 
 
 class Creature:
@@ -75,19 +76,32 @@ choose_your_class = """Choose your class:
   3. Mage
   4. Warlock
   """
-player_char = [warrior, rogue, mage, warlock]
+# create a list of player classes using gc module
+player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
-# create monsters (name, level, max_hp, attacks_num, max_damage, intro)
+# create monsters Enemy(‘name’, level, max_hp, attacks_num, max_damage, ‘intro’)
+# level 0
 bug = Enemy('Bug', 0, 1, 4, 1, "It appears that this game is full of bugs!")
+duckbunny = Enemy('Duckbunny', 0, 2, 1, 1, "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
 rat = Enemy('Rat', 0, 4, 2, 1, "Squeak!")
+# level 1
 goblin = Enemy('Goblin', 1, 8, 1, 4, "I don't have time for this...")
+gelatinous_cube = Enemy('Gelatinous Cube', 1, 16, 1, 2, "Bloop!")
+# level 2
+mimic = Enemy('Mimic', 2, 16, 2, 4, "What’s in the box?")
 orc = Enemy('Orc', 2, 16, 1, 8, "Victory or death! Aaaaarghh!")
+# level 3
 owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
+# level 4
 stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
 froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
-elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
+# level 5
+beholder = Enemy('Beholder', 5, 40, 1, 40, "All places, all things have souls. All souls can be devoured.")
+# lecel 7
+elder_god = Enemy('The Elder God', 7, 1023, 1, 255, "Release your grip on hope!")
 
-monsters_list = [bug, rat, goblin, orc, owlbear, stone_golem, froghemoth, elder_god]
+# create a list of monsters using gc module
+monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
 
 
 def validate_input(message, num=2):
@@ -129,9 +143,11 @@ def choose_enemy(win_counter=0):
     :return: obj - enemy creature randomly generated object
     """
     while True:
-        monster = monsters_list[random.randint(0, len(monsters_list) - 1)]
-        if monster.level <= win_counter:  # only chooses monsters with level lower on equal win counter
-            return monster
+        enemy = monsters_list[random.randint(0, len(monsters_list) - 1)]
+        if enemy.level <= win_counter:  # only chooses monsters with level lower on equal win counter
+            print(f"You encountered {enemy.name}: {enemy.intro}")
+            enemy.hp = enemy.max_hp
+            return enemy
         else:
             continue
 
@@ -152,10 +168,11 @@ def end_message(win_counter):
 
 def fight():
     """
-    This is where the fight happens.
+    Simulates a fight between the player and enemies.
     :return: str - end message
     """
-    print("Greetings adventurer! \nNavigate through the game using buttons from [1] to [4] on your keyboard.\n")
+    print("Greetings adventurer!")
+    print("Navigate through the game using buttons from [1] to [4] on your keyboard.\n")
     player = choose_player_class()
 
     win_counter = 0
@@ -170,27 +187,31 @@ Fight or flight?
             return "Ok then, bye! Come back later."
         elif decision == 1:
             enemy = choose_enemy(win_counter)
-            enemy.hp = enemy.max_hp
             player.hp = player.max_hp
 
-            while player.hp > 0 and enemy.hp > 0:
-                # monster attack turn
+            # monster attack turn if alive
+            while enemy.hp > 0:
                 monster_damage_done = enemy.damage(player)
                 player.hp -= monster_damage_done
-                # player attack turn
-                player_damage_done = player.damage(enemy)
-                enemy.hp -= player_damage_done
 
-            else:  # win and loose conditions
-                if player.hp > 0 >= enemy.hp:
-                    print("You won!")
-                    win_counter += 1
-                elif enemy.hp > 0 <= player.hp:
+                # player attack turn if alive
+                if player.hp > 0:
+                    player_damage_done = player.damage(enemy)
+                    enemy.hp -= player_damage_done
+
+                else:
                     print(f"You lost. {enemy.name} won.")
                     return end_message(win_counter)
-                else:
-                    print("You both died.")
-                    return end_message(win_counter)
+
+            print("You won!")
+            win_counter += 1
 
 
-print(fight())
+def main():
+    game_end = fight()
+    print(game_end)
+
+
+# start the game
+if __name__ == "__main__":
+    main()

@@ -2,8 +2,8 @@
 
 ***
 
-This is a simple text-based game where the player can choose a character class and then fight against different types of monsters. 
-The monsters are randomly generated from a list and their difficulty increases as the player wins more fights.
+This is a simple creature battle game that allows the player to choose their character class and fight against various monsters. 
+The player can choose from four different character classes, each with their own unique stats and abilities.
 
 ## Prerequisites ##
 Python 3.x should be installed on your machine.
@@ -15,11 +15,17 @@ Python 3.x should be installed on your machine.
 4. Follow the on-screen instructions to play the game.
 
 ## How to play ##
-1. When you run the game, you will be prompted to choose a character class. 
-Class determines your health points, number of attacks and maximum damage.
-2. You will then be prompted to choose whether you want to fight or flee.
-3. If you choose to fight, you will be randomly matched against a monster.
+1. Download and save the code into your Python environment.
+2. Run the code.
+3. Choose your character class by typing the corresponding number (1-4).
+4. Battle monsters.
 4. The fight will continue until either you or the monster is defeated.
 5. If you win the fight, you will be matched against a stronger monster in the next fight.
 
+## Classes ## 
+There are four classes that the player can choose from:
 
+1. Warrior - high health, high damage
+2. Rogue - low health, high damage, multiple attacks
+3. Mage - low health, very high damage, single attack
+4. Warlock - medium health, low damage, multiple attack
