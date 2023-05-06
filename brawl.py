@@ -92,20 +92,27 @@ bug = Enemy('Bug', 0, 2, 4, 1, "It appears that this game is full of bugs!")
 duckbunny = Enemy('Duckbunny', 0, 2, 1, 1,
                   "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
 # level 1
-rat = Enemy('Giant Rat', 1, 6, 2, 1, "Squeak!")
+kobold = Enemy('Kobold', 1, 5, 1, 4)
+giant_rat = Enemy('Giant Rat', 1, 6, 2, 1, "Squeak!")
 goblin = Enemy('Goblin', 2, 8, 1, 4, "I don't have time for this...")
 
 # level 2
-gelatinous_cube = Enemy('Gelatinous Cube', 2, 16, 1, 2, "Bloop!")
-skeleton = Enemy('Skeleton', 2, 12, 1, 6, "")
+bandit = Enemy('bandit', 2, 11, 1, 8)
+poisonous_snake = Enemy('Poisonous Snake', 2, 12, 4, 2, "Sssss...")
+skeleton = Enemy('Skeleton', 2, 12, 1, 6)
 
 # level 3
+hobgoblin = Enemy('Hobgoblin', 3, 18, 1, 8)
+ghoul = Enemy('Ghoul', 3, 22, 1, 4)
 mimic = Enemy('Mimic', 3, 58, 2, 4, "What’s in the box?")
 orc = Enemy('Orc', 3, 16, 1, 16, "Victory or death! Aaaaarghh!")
+violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 4)
 
 # level 4
 basilisk = Enemy('Basilisk', 4, 52, 1, 6)
+gelatinous_cube = Enemy('Gelatinous Cube', 4, 84, 1, 2, "Bloop!")
 owlbear = Enemy('Owlbear', 4, 59, 1, 10, "HOOT-GROWL!")
+ogre = Enemy('Ogre', 4, 50, 1, 13)
 
 # level 5
 ghost = Enemy('Ghost', 5, 45, 1, 17, "Whoo-oo-oo-oo...")
