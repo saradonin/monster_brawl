@@ -79,15 +79,27 @@ choose_your_class = """Choose your class:
 # create a list of player classes using gc module
 player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature) and not isinstance(ob, Enemy)]
 
-# create monsters (name, level, max_hp, attacks_num, max_damage, intro)
+# create monsters Enemy(‘name’, level, max_hp, attacks_num, max_damage, ‘intro’)
+# level 0
 bug = Enemy('Bug', 0, 1, 4, 1, "It appears that this game is full of bugs!")
+duckbunny = Enemy('Duckbunny', 0, 2, 1, 1, "You see a rabbit with a duck's bill instead of a rabbit's snout. Why? WHY?!")
 rat = Enemy('Rat', 0, 4, 2, 1, "Squeak!")
+# level 1
 goblin = Enemy('Goblin', 1, 8, 1, 4, "I don't have time for this...")
+gelatinous_cube = Enemy('Gelatinous Cube', 1, 16, 1, 2, "Bloop!")
+# level 2
+mimic = Enemy('Mimic', 2, 16, 2, 4, "What’s in the box?")
 orc = Enemy('Orc', 2, 16, 1, 8, "Victory or death! Aaaaarghh!")
+# level 3
 owlbear = Enemy('Owlbear', 3, 20, 1, 6, "HOOT-GROWL!")
+# level 4
 stone_golem = Enemy('Stone Golem', 4, 32, 1, 3, "Flesh. Weak. Return to the earth.")
 froghemoth = Enemy('Froghemoth', 4, 60, 2, 4, "Aaaaaughibbrgubugbugrguburgle!")
-elder_god = Enemy('The Elder God', 5, 1023, 1, 255, "All places, all things have souls. All souls can be devoured.")
+# level 5
+beholder = Enemy('Beholder', 5, 40, 1, 40, "All places, all things have souls. All souls can be devoured.")
+# lecel 7
+elder_god = Enemy('The Elder God', 7, 1023, 1, 255, "Release your grip on hope!")
+
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
 
@@ -177,13 +189,13 @@ Fight or flight?
             enemy = choose_enemy(win_counter)
             player.hp = player.max_hp
 
+            # monster attack turn if alive
             while enemy.hp > 0:
-                # monster attack turn
                 monster_damage_done = enemy.damage(player)
                 player.hp -= monster_damage_done
 
+                # player attack turn if alive
                 if player.hp > 0:
-                    # player attack turn
                     player_damage_done = player.damage(enemy)
                     enemy.hp -= player_damage_done
 
@@ -196,8 +208,8 @@ Fight or flight?
 
 
 def main():
-    end_message = fight()
-    print(end_message)
+    game_end = fight()
+    print(game_end)
 
 
 # start the game
