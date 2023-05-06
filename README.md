@@ -3,7 +3,7 @@
 ***
 
 This is a simple creature battle game that allows the player to choose their character class and fight against various monsters. 
-The player can choose from four different character classes, each with their own unique stats and abilities.
+The player can choose from four different character classes, each with their own unique stats.
 
 ## Prerequisites ##
 Python 3.x should be installed on your machine.
