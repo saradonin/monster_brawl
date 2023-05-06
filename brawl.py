@@ -97,7 +97,7 @@ giant_rat = Enemy('Giant Rat', 1, 6, 2, 1, "Squeak!")
 goblin = Enemy('Goblin', 2, 8, 1, 4, "I don't have time for this...")
 
 # level 2
-bandit = Enemy('bandit', 2, 11, 1, 8)
+bandit = Enemy('Bandit', 2, 11, 1, 8)
 poisonous_snake = Enemy('Poisonous Snake', 2, 12, 4, 2, "Sssss...")
 skeleton = Enemy('Skeleton', 2, 12, 1, 6)
 
@@ -105,14 +105,14 @@ skeleton = Enemy('Skeleton', 2, 12, 1, 6)
 hobgoblin = Enemy('Hobgoblin', 3, 18, 1, 8)
 ghoul = Enemy('Ghoul', 3, 22, 1, 4)
 mimic = Enemy('Mimic', 3, 58, 2, 4, "What’s in the box?")
-orc = Enemy('Orc', 3, 16, 1, 16, "Victory or death! Aaaaarghh!")
+orc = Enemy('Orc', 3, 16, 1, 16, "Victory or death!")
 violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 3)
 
 # level 4
 basilisk = Enemy('Basilisk', 4, 52, 1, 6)
 gelatinous_cube = Enemy('Gelatinous Cube', 4, 84, 1, 2, "Bloop!")
 owlbear = Enemy('Owlbear', 4, 59, 1, 10, "HOOT-GROWL!")
-ogre = Enemy('Ogre', 4, 50, 1, 13)
+ogre = Enemy('Ogre', 4, 50, 1, 13, "Stupid puny thing! Me smash!")
 
 # level 5
 ghost = Enemy('Ghost', 5, 45, 1, 17, "Whoo-oo-oo-oo...")
@@ -123,15 +123,19 @@ troll = Enemy('Troll', 6, 84, 3, 7, "")
 chimera = Enemy('Chimera', 6, 114, 1, 12, "")
 
 # level 7
-black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, "")
+black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, "You and the others, you owe me awe.")
 froghemoth = Enemy('Froghemoth', 7, 80, 2, 12, "Aaaaaughibbrgubugbugrguburgle!")
 
 # level 8
 hydra = Enemy('Hydra', 8, 172, 3, 10, "")
 beholder = Enemy('Beholder', 8, 180, 1, 36, "All places, all things have souls. All souls can be devoured.")
 
+# level 9
+demon = Enemy('Demon', 9, 262, 4, 6)
+
 # level 10
 elder_god = Enemy('The Elder God', 10, 800, 1, 150, "Release your grip on hope!")
+kraken = Enemy('Kraken', 10, 472, 3, 40)
 
 # create a list of monsters using gc module
 monsters_list = [ob for ob in gc.get_objects() if isinstance(ob, Enemy)]
@@ -243,8 +247,7 @@ Fight or flight?
 
 
 def main():
-    game_end = fight()
-    print(game_end)
+    print(fight())
 
 
 # start the game
