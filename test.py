@@ -1,5 +1,6 @@
-import brawl
-
+import main
+import creature as cr
+import enemy as en
 
 # change value to 1 or True to run a test
 TEST_LEVEL_UP_FIGHTER = 1
@@ -22,19 +23,19 @@ def test_level_up(creature, max_level):
 def test_choose_enemy(level, number):
     result = f"Enemies for player level {level} \n"
     for i in range(number):
-        enemy = brawl.choose_enemy(level)
+        enemy = main.choose_enemy(level)
         result += f"{enemy.name}: level {enemy.level} \n"
     return result
 
 
 if TEST_LEVEL_UP_FIGHTER:
-    print(test_level_up(brawl.fighter, 9))
+    print(test_level_up(cr.fighter, 9))
 if TEST_LEVEL_UP_ROGUE:
-    print(test_level_up(brawl.rogue, 9))
+    print(test_level_up(cr.rogue, 9))
 if TEST_LEVEL_UP_SORCERER:
-    print(test_level_up(brawl.sorcerer, 9))
+    print(test_level_up(cr.sorcerer, 9))
 if TEST_LEVEL_UP_WARLOCK:
-    print(test_level_up(brawl.warlock, 9))
+    print(test_level_up(cr.warlock, 9))
 
 if TEST_CHOOSE_ENEMY:
     print(test_choose_enemy(3, 10))

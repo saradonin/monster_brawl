@@ -10,7 +10,7 @@ Python 3.x should be installed on your machine.
 
 ## How to play ##
 1. Clone the repository to your local machine.
-2. Run the brawl.py file 
+2. Run the main.py file 
 3. Follow the on-screen instructions to play the game.
 4. Choose your character class by typing the corresponding number (1-4).
 5. Battle monsters.
