@@ -1,6 +1,5 @@
 import random
 import math
-import gc
 
 
 class Creature:
@@ -26,7 +25,6 @@ class Creature:
         self.attacks_num = attacks_num
         self.max_damage = max_damage
         self.level = level
-        self.hp = max_hp
         self.damage_type = damage_type
 
     def damage(self, enemy):
@@ -36,7 +34,7 @@ class Creature:
         :param enemy: obj - the enemy that the creature is attacking
         :return: int - total amount of damage dealt to the enemy
         """
-
+        from enemy import Enemy
         damage_done = 0
         for i in range(self.attacks_num):
             strike = random.randint(1, self.max_damage)
@@ -44,9 +42,9 @@ class Creature:
                 damage_type = self.damage_type[random.randint(0, len(self.damage_type) - 1)]
             else:
                 damage_type = self.damage_type
-            if self in player_char:
+            if not isinstance(self, Enemy):
                 print(f"You hit {enemy.name} for {strike} points of {damage_type} damage")
-            elif enemy in player_char:
+            else:
                 print(f"{self.name} hit you for {strike} points of {damage_type} damage")
             damage_done += strike
         return damage_done
@@ -57,33 +55,3 @@ class Creature:
         self.max_hp = math.ceil(self.max_hp * modifier + self.level * 2)
         self.max_damage = math.ceil(self.max_damage * modifier)
         return f"You reached level {self.level}!"
-
-
-# DND damage types
-ACID = 'Acid'
-BLUDGEONING = 'Bludgeoning'
-COLD = 'Cold'
-FIRE = 'Fire'
-FORCE = 'Force'
-LIGHTNING = 'Lightning'
-NECROTIC = 'Necrotic'
-PIERCING = 'Piercing'
-POISON = 'Poison'
-PSYCHIC = 'Psychic'
-RADIANT = 'Radiant'
-SLASHING = 'Slashing'
-THUNDER = 'Thunder'
-
-# create player classes (name, level, max_hp, attacks_num, max_damage)
-fighter = Creature('Fighter', 1, 16, 1, 10, (BLUDGEONING, SLASHING))
-rogue = Creature('Rogue', 1, 12, 3, 4, (PIERCING, POISON))
-sorcerer = Creature('Sorcerer', 1, 8, 1, 20, (COLD, FIRE, FORCE))
-warlock = Creature('Warlock', 1, 14, 4, 2, (FORCE, NECROTIC, PSYCHIC))
-choose_your_class = """Choose your class: 
-  1. Fighter
-  2. Rogue
-  3. Sorcerer
-  4. Warlock
-  """
-# create a list of player classes using gc module
-player_char = [ob for ob in gc.get_objects() if isinstance(ob, Creature)]
