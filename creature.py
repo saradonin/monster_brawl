@@ -49,6 +49,11 @@ class Creature:
         return damage_done
 
     def level_up(self):
+        """
+        Increases the level of the character and updates their maximum health and damage.
+
+        :return: str - message indicating the new level reached
+        """
         modifier = 1.2
         self.level += 1
         self.max_hp = math.ceil(self.max_hp * modifier + self.level * 2)
