@@ -1,6 +1,7 @@
 import main
 import data
 
+
 # change value to 1 or True to run a test
 TEST_LEVEL_UP_FIGHTER = 0
 TEST_LEVEL_UP_ROGUE = 0

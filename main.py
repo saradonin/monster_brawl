@@ -82,6 +82,7 @@ Fight or flight?
         decision = validate_input(fight_or_flight, 2)
         if decision == 2:
             return "Ok then, bye! Come back later."
+
         elif decision == 1:
             enemy = choose_enemy(player.level)
             player.hp = player.max_hp
@@ -102,6 +103,7 @@ Fight or flight?
 
             print("You won!")
             win_counter += 1
+
             # level up every 5 wins
             if not win_counter % 5:
                 print(player.level_up())
