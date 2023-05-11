@@ -1,6 +1,5 @@
 import random
-import creature
-import enemy as en
+import data
 
 
 def validate_input(message, num=2):
@@ -29,8 +28,8 @@ def choose_player_class():
     Prompts the player to choose their character class from a list of options.
     :return: obj - player's chosen character class object
     """
-    player_choice = validate_input(creature.choose_your_class, len(creature.player_char))
-    player = creature.player_char[int(player_choice - 1)]
+    player_choice = validate_input(data.choose_your_class, len(data.player_char))
+    player = data.player_char[int(player_choice - 1)]
 
     return player
 
@@ -42,7 +41,7 @@ def choose_enemy(player_level=1):
     :return: obj - enemy creature randomly generated object
     """
     while True:
-        enemy = en.monsters_list[random.randint(0, len(en.monsters_list) - 1)]
+        enemy = data.monsters_list[random.randint(0, len(data.monsters_list) - 1)]
         # ignores enemies way too easy or too hard
         if player_level - 2 <= enemy.level <= player_level + 1:
             print(f"You encountered {enemy.name} (level {enemy.level}): {enemy.intro}")
@@ -83,6 +82,7 @@ Fight or flight?
         decision = validate_input(fight_or_flight, 2)
         if decision == 2:
             return "Ok then, bye! Come back later."
+
         elif decision == 1:
             enemy = choose_enemy(player.level)
             player.hp = player.max_hp
@@ -103,6 +103,7 @@ Fight or flight?
 
             print("You won!")
             win_counter += 1
+
             # level up every 5 wins
             if not win_counter % 5:
                 print(player.level_up())

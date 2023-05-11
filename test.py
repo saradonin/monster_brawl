@@ -1,13 +1,13 @@
 import main
-import creature as cr
-import enemy as en
+import data
+
 
 # change value to 1 or True to run a test
-TEST_LEVEL_UP_FIGHTER = 1
-TEST_LEVEL_UP_ROGUE = 1
-TEST_LEVEL_UP_SORCERER = 1
-TEST_LEVEL_UP_WARLOCK = 1
-TEST_CHOOSE_ENEMY = 0
+TEST_LEVEL_UP_FIGHTER = 0
+TEST_LEVEL_UP_ROGUE = 0
+TEST_LEVEL_UP_SORCERER = 0
+TEST_LEVEL_UP_WARLOCK = 0
+TEST_CHOOSE_ENEMY = 1
 
 
 def test_level_up(creature, max_level):
@@ -29,13 +29,13 @@ def test_choose_enemy(level, number):
 
 
 if TEST_LEVEL_UP_FIGHTER:
-    print(test_level_up(cr.fighter, 9))
+    print(test_level_up(data.fighter, 9))
 if TEST_LEVEL_UP_ROGUE:
-    print(test_level_up(cr.rogue, 9))
+    print(test_level_up(data.rogue, 9))
 if TEST_LEVEL_UP_SORCERER:
-    print(test_level_up(cr.sorcerer, 9))
+    print(test_level_up(data.sorcerer, 9))
 if TEST_LEVEL_UP_WARLOCK:
-    print(test_level_up(cr.warlock, 9))
+    print(test_level_up(data.warlock, 9))
 
 if TEST_CHOOSE_ENEMY:
     print(test_choose_enemy(3, 10))
