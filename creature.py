@@ -10,7 +10,6 @@ class Creature:
     :ivar max_hp: int - The maximum hit points of the creature.
     :ivar attacks_num: int - The number of attacks the creature can make.
     :ivar max_damage: int - The maximum amount of damage the creature can deal.
-    :ivar hp: int - The current hit points of the creature, initialized to max_hp.
     :ivar level: int - The level of the creature.
 
     :param name: str - The name of the creature.
@@ -34,7 +33,7 @@ class Creature:
         :param enemy: obj - the enemy that the creature is attacking
         :return: int - total amount of damage dealt to the enemy
         """
-        from enemy import Enemy
+        from enemy import Enemy  # import inside function to avoid circular import error
         damage_done = 0
         for i in range(self.attacks_num):
             strike = random.randint(1, self.max_damage)
