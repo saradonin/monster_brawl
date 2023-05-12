@@ -43,11 +43,15 @@ duckbunny = Enemy('Duckbunny', 0, 2, 1, 1, PIERCING,
 # level 1
 kobold = Enemy('Kobold', 1, 5, 1, 4, (BLUDGEONING, PIERCING))
 giant_rat = Enemy('Giant Rat', 1, 6, 2, 1, PIERCING, "Squeak!")
-goblin = Enemy('Goblin', 2, 8, 1, 4, (PIERCING, SLASHING), "I don't have time for this...")
+goblin = Enemy('Goblin', 1, 8, 1, 4, (PIERCING, SLASHING), "I don't have time for this...")
+shrieker = Enemy('Shrieker', 1, 13, 1, 4, THUNDER)
 
 # level 2
 bandit = Enemy('Bandit', 2, 11, 1, 8, (PIERCING, SLASHING))
+giant_centipede = Enemy('Giant Centipede', 2, 4, 2, 6, (PIERCING, POISON))
+flying_sword = Enemy('Flying Sword', 2, 17, 1, 8, SLASHING)
 poisonous_snake = Enemy('Poisonous Snake', 2, 12, 4, 2, (PIERCING, POISON), "Sssss...")
+shadow = Enemy('Shadow', 2, 16, 1, 12, NECROTIC)
 skeleton = Enemy('Skeleton', 2, 12, 1, 6, (BLUDGEONING, PIERCING))
 
 # level 3
@@ -56,6 +60,7 @@ gray_ooze = Enemy('Gray Ooze', 3, 22, 1, 4, (ACID, BLUDGEONING))
 mimic = Enemy('Mimic', 3, 58, 2, 4, (BLUDGEONING, LIGHTNING), "What’s in the box?")
 orc = Enemy('Orc', 3, 16, 1, 16, (PIERCING, SLASHING), "Victory or death!")
 violet_fungus = Enemy('Violet Fungus', 3, 18, 4, 3, NECROTIC)
+zombie = Enemy('Zombie', 3, 22, 1, 6, BLUDGEONING)
 
 # level 4
 basilisk = Enemy('Basilisk', 4, 52, 1, 6, (PIERCING, POISON))
@@ -66,23 +71,28 @@ will_o_wisp = Enemy('Will-O’-Wisp', 4, 22, 2, 16, LIGHTNING)
 
 # level 5
 ghost = Enemy('Ghost', 5, 45, 1, 17, (FORCE, NECROTIC), "Whoo-oo-oo-oo...")
+mummy = Enemy('Mummy', 5, 58, 1, 12, (BLUDGEONING, NECROTIC))
 nightmare = Enemy('Nightmare', 5, 68, 2, 8, (BLUDGEONING, FIRE), "I have so much to show you...")
-stone_golem = Enemy('Stone Golem', 5, 93, 1, 6, BLUDGEONING, "Flesh. Weak. Return to the earth.")
+
 
 # level 6
+ettin = Enemy('Ettin', 6, 85, 2, 16, (PIERCING, SLASHING))
 troll = Enemy('Troll', 6, 84, 3, 7, (PIERCING, SLASHING))
 chimera = Enemy('Chimera', 6, 114, 1, 12, (BLUDGEONING, PIERCING, SLASHING))
 
 # level 7
 black_dragon = Enemy('Black Dragon', 7, 127, 1, 15, (ACID, SLASHING))
 froghemoth = Enemy('Froghemoth', 7, 80, 2, 12, (ACID, BLUDGEONING), "Aaaaaughibbrgubugbugrguburgle!")
+roper = Enemy('Roper', 7, 93, 4, 24, PIERCING)
 
 # level 8
 hydra = Enemy('Hydra', 8, 172, 3, 10, (PIERCING, COLD))
 beholder = Enemy('Beholder', 8, 180, 1, 36, (FORCE, NECROTIC),
                  "All places, all things have souls. All souls can be devoured.")
+stone_giant = Enemy('Stone Giant', 8, 126, 1, 40, BLUDGEONING, "Flesh. Weak. Return to the earth.")
 
 # level 9
+angel = Enemy('Angel', 9, 243, 3, 24, (FIRE, PIERCING, RADIANT))
 demon = Enemy('Demon', 9, 262, 4, 12, (FIRE, SLASHING), "Everything you love will burn!")
 lich = Enemy('Lich', 9, 135, 2, 40, (ACID, COLD, FIRE, FORCE, THUNDER),
              "Very well... witness what I have seen and TREMBLE!")
