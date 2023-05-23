@@ -17,9 +17,9 @@ def validate_input(message, num=2, player=None):
             print("Invalid input. Try again.")
             continue
 
-        if choice == "GOD":
-            player.level_up(5)
-            print("God mode activated!")
+        if num == 2 and choice == "hero":
+            player.level_up(2)
+            print("Hero mode activated!")
             continue
 
         if choice in "123456789"[0:num] and len(choice) == 1:
