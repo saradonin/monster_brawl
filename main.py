@@ -2,7 +2,7 @@ import random
 import data
 
 
-def validate_input(message, num=2):
+def validate_input(message, num=2, player=None):
     """
     Prompts user to make a choice, validates input.
     :param message: string - prompt
@@ -15,6 +15,11 @@ def validate_input(message, num=2):
         # test for empty string
         if choice == "":
             print("Invalid input. Try again.")
+            continue
+
+        if num == 2 and choice == "hero":
+            player.level_up(2)
+            print("Hero mode activated!")
             continue
 
         if choice in "123456789"[0:num] and len(choice) == 1:
@@ -79,7 +84,7 @@ Fight or flight?
 2. [FLIGHT] I'd rather stay home and read a book.
       """
     while True:
-        decision = validate_input(fight_or_flight, 2)
+        decision = validate_input(fight_or_flight, 2, player)
         if decision == 2:
             return "Ok then, bye! Come back later."
 
