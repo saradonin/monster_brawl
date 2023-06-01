@@ -1,7 +1,5 @@
 import gc
-from creature import Creature
-from enemy import Enemy
-
+from models import Creature, Enemy
 
 # DND damage types
 ACID = 'Acid'
@@ -17,7 +15,6 @@ PSYCHIC = 'Psychic'
 RADIANT = 'Radiant'
 SLASHING = 'Slashing'
 THUNDER = 'Thunder'
-
 
 # player data
 # create player classes (name, level, max_hp, attacks_num, max_damage)
@@ -73,7 +70,6 @@ will_o_wisp = Enemy('Will-O’-Wisp', 4, 22, 2, 16, LIGHTNING)
 ghost = Enemy('Ghost', 5, 45, 1, 17, (FORCE, NECROTIC), "Whoo-oo-oo-oo...")
 mummy = Enemy('Mummy', 5, 58, 1, 12, (BLUDGEONING, NECROTIC))
 nightmare = Enemy('Nightmare', 5, 68, 2, 8, (BLUDGEONING, FIRE), "I have so much to show you...")
-
 
 # level 6
 ettin = Enemy('Ettin', 6, 85, 2, 16, (PIERCING, SLASHING))

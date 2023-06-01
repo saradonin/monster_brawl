@@ -3,11 +3,11 @@ import data
 
 
 # change value to 1 or True to run a test
-TEST_LEVEL_UP_FIGHTER = 0
+TEST_LEVEL_UP_FIGHTER = 1
 TEST_LEVEL_UP_ROGUE = 0
 TEST_LEVEL_UP_SORCERER = 0
 TEST_LEVEL_UP_WARLOCK = 0
-TEST_CHOOSE_ENEMY = 1
+TEST_CHOOSE_ENEMY = 0
 
 
 def test_level_up(creature, max_level):
