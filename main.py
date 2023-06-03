@@ -114,7 +114,7 @@ def main():
     print("Greetings adventurer!")
     print("Navigate through the game using buttons from [1] to [4] on your keyboard.\n")
     player = choose_player_class()
-    fight(player)
+    print(fight(player))
 
 
 # start the game
