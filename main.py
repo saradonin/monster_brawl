@@ -78,13 +78,13 @@ def fight():
     player = choose_player_class()
 
     win_counter = 0
-    fight_or_flight = """
+    FIGHT_OR_FLIGHT = """
 Fight or flight? 
 1. [FIGHT] I'd love to see a good brawl!
 2. [FLIGHT] I'd rather stay home and read a book.
       """
     while True:
-        decision = validate_input(fight_or_flight, 2, player)
+        decision = validate_input(FIGHT_OR_FLIGHT, 2, player)
         if decision == 2:
             return "Ok then, bye! Come back later."
 
@@ -114,10 +114,6 @@ Fight or flight?
                 print(player.level_up())
 
 
-def main():
-    print(fight())
-
-
 # start the game
 if __name__ == "__main__":
-    main()
+    print(fight())
