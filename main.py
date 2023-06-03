@@ -116,4 +116,4 @@ Fight or flight?
 
 # start the game
 if __name__ == "__main__":
-    print(fight())
+    fight()
