@@ -35,7 +35,7 @@ class Creature:
         """
         damage_done = 0
         for i in range(self.attacks_num):
-            strike = random.randint(1, self.max_damage)
+            strike = random.randint(math.ceil(self.max_damage // 8), self.max_damage)
             if isinstance(self.damage_type, tuple):
                 damage_type = self.damage_type[random.randint(0, len(self.damage_type) - 1)]
             else:
