@@ -18,7 +18,7 @@ def validate_input(message, num=2, player=None):
             continue
 
         if num == 2 and choice == "hero":
-            player.level_up(2)
+            player.level_up(3)
             print("Hero mode activated!")
             continue
 
@@ -68,15 +68,11 @@ def end_message(win_counter):
         return f"You won {win_counter} battles today. What a shame."
 
 
-def fight():
+def fight(player):
     """
     Simulates a fight between the player and enemies.
     :return: str - end message
     """
-    print("Greetings adventurer!")
-    print("Navigate through the game using buttons from [1] to [4] on your keyboard.\n")
-    player = choose_player_class()
-
     win_counter = 0
     FIGHT_OR_FLIGHT = """
 Fight or flight? 
@@ -114,6 +110,13 @@ Fight or flight?
                 print(player.level_up())
 
 
+def main():
+    print("Greetings adventurer!")
+    print("Navigate through the game using buttons from [1] to [4] on your keyboard.\n")
+    player = choose_player_class()
+    fight(player)
+
+
 # start the game
 if __name__ == "__main__":
-    fight()
+    main()
