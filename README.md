@@ -1,4 +1,4 @@
-![brawl](https://github.com/saradonin/monster_brawl/assets/124811561/5bc449b2-025b-4357-85c8-adc46964d425)
+
 # Monster Brawl #
 
 ***
@@ -24,3 +24,6 @@ There are four classes that the player can choose from:
 2. Rogue - low health, high damage, multiple attacks
 3. Mage - low health, very high damage, single attack
 4. Warlock - medium health, low damage, multiple attack
+
+
+![brawl](https://github.com/saradonin/monster_brawl/assets/124811561/5bc449b2-025b-4357-85c8-adc46964d425)
