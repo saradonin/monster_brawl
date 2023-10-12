@@ -17,6 +17,24 @@ Python 3.x should be installed on your machine.
 5. Battle monsters.
 6. If you win the fight, you will be matched against a stronger monster in the next fight.
 
+## How to run Monster Brawl Dockerized ##
+
+1. Build & Run:
+```
+docker build . -t python-app
+docker run -it --name monster-brawl python-app
+```
+2. Follow steps 3-6 from *How to play* section
+3. Stop Container:
+```
+docker stop monster-brawl
+```
+4. Restart the container:
+```
+docker start monster-brawl && exec -it monster-brawl python3 main.py
+```
+Ensure you have [Docker](https://www.docker.com/get-started/) installed before running these commands.
+
 ## Classes ## 
 There are four classes that the player can choose from:
 
