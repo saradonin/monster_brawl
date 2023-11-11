@@ -21,8 +21,8 @@ Python 3.x should be installed on your machine.
 
 1. Build & Run:
 ```
-docker build . -t python-app
-docker run -it --name monster-brawl python-app
+# docker build . -t monster-app
+# docker run -it --name monster-brawl monster-app
 ```
 2. Follow steps 3-6 from *How to play* section
 3. Stop Container:
